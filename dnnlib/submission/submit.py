@@ -86,7 +86,7 @@ class SubmitConfig(util.EasyDict):
         # submit (set these)
         self.submit_target = SubmitTarget.LOCAL
         self.num_gpus = 1
-        self.print_info = False
+        self.print_info = True  # Should allow comments
         self.ask_confirmation = False
         self.use_typeguard = False
 
