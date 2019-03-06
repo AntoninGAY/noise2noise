@@ -20,19 +20,22 @@ from util import save_image, save_snapshot
 from validation import ValidationSet
 from dataset import create_dataset
 
+
 class AugmentGaussian:
     def __init__(self, validation_stddev, train_stddev_rng_range):
         self.validation_stddev = validation_stddev
         self.train_stddev_range = train_stddev_rng_range
 
     def add_train_noise_tf(self, x):
-        (minval,maxval) = self.train_stddev_range
+        (minval, maxval) = self.train_stddev_range
         shape = tf.shape(x)
-        rng_stddev = tf.random_uniform(shape=[1, 1, 1], minval=minval/255.0, maxval=maxval/255.0)
-        return x + tf.random_normal(shape) * rng_stddev
+        rng_stddev = tf.random_uniform(shape=[1, 1, 1], minval=minval / 255.0, maxval=maxval / 255.0)
+        y = x + tf.random_normal(shape) * rng_stddev
+        return y
 
     def add_validation_noise_np(self, x):
-        return x + np.random.normal(size=x.shape)*(self.validation_stddev/255.0)
+        return x + np.random.normal(size=x.shape) * (self.validation_stddev / 255.0)
+
 
 class AugmentPoisson:
     def __init__(self, lam_max):
@@ -40,31 +43,128 @@ class AugmentPoisson:
 
     def add_train_noise_tf(self, x):
         chi_rng = tf.random_uniform(shape=[1, 1, 1], minval=0.001, maxval=self.lam_max)
-        return tf.random_poisson(chi_rng*(x+0.5), shape=[])/chi_rng - 0.5
+        return tf.random_poisson(chi_rng * (x + 0.5), shape=[]) / chi_rng - 0.5
 
     def add_validation_noise_np(self, x):
         chi = 30.0
-        return np.random.poisson(chi*(x+0.5))/chi - 0.5
+        return np.random.poisson(chi * (x + 0.5)) / chi - 0.5
+
+
+# TODO: complete function Speckle, as an additive zero-mean noise
+class AugmentSpeckle:
+    def __init__(self, L, normalize=False, norm_max=1., norm_min=0.):
+        self.L = L
+        self.normalize = normalize
+        self.norm_max = norm_max
+        self.norm_min = norm_min
+
+    def add_train_noise_tf(self, im_log):
+        """ Add noise to training dataset.
+        Author: Emanuele Dalsasso <emanuele.dalsasso@telecom-paristech.fr>
+
+        PAPER REFERENCE: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1000333
+        "Statistical properties of logaritmically transformed speckle"
+
+        :param im_log: log of RGB image of size [3,256,256] TF
+        :return:
+        """
+
+        # We compute the Speckle noise
+        s = tf.zeros(shape=tf.shape(im_log))
+        for k in range(0, self.L):
+            gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(im_log), stddev=1),
+                                       tf.random_normal(shape=tf.shape(im_log), stddev=1))) ** 2) / 2
+            s = s + gamma
+        s_amplitude = tf.sqrt(s / self.L)
+        log_speckle = tf.log(s_amplitude)
+        if self.normalize:
+            log_speckle = log_speckle / (self.norm_max - self.norm_min)
+
+        # The biased noisy image
+        y = im_log + log_speckle
+
+        # We unbiased the image
+        return y
+        # TODO: reuse bias
+        # return self.add_bias(y)
+
+    def add_validation_noise_np(self, im_log):
+        """ Add noise to training dataset.
+        Author: Emanuele Dalsasso <emanuele.dalsasso@telecom-paristech.fr>
+
+        PAPER REFERENCE: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1000333
+        "Statistical properties of logaritmically transformed speckle"
+
+        :param im_log: log of RGB image of size [3,256,256] TF
+        :return:
+        """
+
+        # We compute the Speckle noise
+
+        s = tf.zeros(shape=tf.shape(im_log))
+        for k in range(0, self.L):
+            gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(im_log), stddev=1),
+                                       tf.random_normal(shape=tf.shape(im_log), stddev=1))) ** 2) / 2
+            s = s + gamma
+
+        s_amplitude = tf.sqrt(s / self.L)
+        log_speckle = tf.log(s_amplitude)
+        if self.normalize:
+            log_speckle = log_speckle / (self.norm_max - self.norm_min)
+
+        # The biased noisy image
+        y = im_log + log_speckle
+
+        # We unbiased the image
+        return im_log
+        # TODO: reuse bias
+        # return self.add_bias(y)
+
+    def image_to_log(self, x):
+        """ Returns the log of an image
+
+        :param x:
+        :return:
+        """
+
+        return tf.log(x)
+
+    def add_bias(self, x, bias=None):
+        """ Adds a bias to an image. If none given, automatically computed
+
+        :param x:
+        :param bias:
+        """
+
+        gamma = 0.5772
+
+        if bias is None:
+            bias = (tf.log(4 / np.pi) - gamma) / 2.0
+            bias = - bias
+
+        return x + bias
+
 
 def compute_ramped_down_lrate(i, iteration_count, ramp_down_perc, learning_rate):
     ramp_down_start_iter = iteration_count * (1 - ramp_down_perc)
     if i >= ramp_down_start_iter:
         t = ((i - ramp_down_start_iter) / ramp_down_perc) / iteration_count
-        smooth = (0.5+np.cos(t * np.pi)/2)**2
+        smooth = (0.5 + np.cos(t * np.pi) / 2) ** 2
         return learning_rate * smooth
     return learning_rate
 
+
 def train(
-    submit_config: dnnlib.SubmitConfig,
-    iteration_count: int,
-    eval_interval: int,
-    minibatch_size: int,
-    learning_rate: float,
-    ramp_down_perc: float,
-    noise: dict,
-    validation_config: dict,
-    train_tfrecords: str,
-    noise2noise: bool):
+        submit_config: dnnlib.SubmitConfig,
+        iteration_count: int,
+        eval_interval: int,
+        minibatch_size: int,
+        learning_rate: float,
+        ramp_down_perc: float,
+        noise: dict,
+        validation_config: dict,
+        train_tfrecords: str,
+        noise2noise: bool):
     noise_augmenter = dnnlib.util.call_func_by_name(**noise)
     validation_set = ValidationSet(submit_config)
     validation_set.load(**validation_config)
@@ -86,7 +186,7 @@ def train(
 
     print('Building TensorFlow graph...')
     with tf.name_scope('Inputs'), tf.device("/cpu:0"):
-        lrate_in        = tf.placeholder(tf.float32, name='lrate_in', shape=[])
+        lrate_in = tf.placeholder(tf.float32, name='lrate_in', shape=[])
 
         noisy_input, noisy_target, clean_target = dataset_iter.get_next()
         noisy_input_split = tf.split(noisy_input, submit_config.num_gpus)
@@ -128,7 +228,6 @@ def train(
 
         # Dump training status
         if i % eval_interval == 0:
-
             time_train = ctx.get_time_since_last_update()
             time_total = ctx.get_time_since_start()
 
@@ -141,9 +240,10 @@ def train(
 
             validation_set.evaluate(net, i, noise_augmenter.add_validation_noise_np)
 
-            print('iter %-10d time %-12s sec/eval %-7.1f sec/iter %-7.2f maintenance %-6.1f' % (
+            print('iter %-10d time %-12s eta %-12s sec/eval %-7.1f sec/iter %-7.2f maintenance %-6.1f' % (
                 autosummary('Timing/iter', i),
                 dnnlib.util.format_time(autosummary('Timing/total_sec', time_total)),
+                dnnlib.util.format_time(autosummary('Timing/total_sec', time_train * (iteration_count - i))),
                 autosummary('Timing/sec_per_eval', time_train),
                 autosummary('Timing/sec_per_iter', time_train / eval_interval),
                 autosummary('Timing/maintenance_sec', time_maintenance)))
@@ -152,7 +252,7 @@ def train(
             ctx.update(loss='run %d' % submit_config.run_id, cur_epoch=i, max_epoch=iteration_count)
             time_maintenance = ctx.get_last_update_interval() - time_train
 
-        lrate =  compute_ramped_down_lrate(i, iteration_count, ramp_down_perc, learning_rate)
+        lrate = compute_ramped_down_lrate(i, iteration_count, ramp_down_perc, learning_rate)
         tfutil.run([train_step], {lrate_in: lrate})
 
     print("Elapsed time: {0}".format(util.format_time(ctx.get_time_since_start())))

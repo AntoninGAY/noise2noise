@@ -48,7 +48,10 @@ poisson_noise_config = dnnlib.EasyDict(
     func_name='train.AugmentPoisson',
     lam_max=50.0
 )
-# ToDo: add our own type of noise
+speckle_noise_config = dnnlib.EasyDict(
+    func_name='train.AugmentSpeckle',
+    L=20
+)
 
 # ------------------------------------------------------------------------------------------
 # Preconfigured validation sets
@@ -62,14 +65,15 @@ default_validation_config = datasets['kodak']
 
 corruption_types = {
     'gaussian': gaussian_noise_config,
-    'poisson': poisson_noise_config
+    'poisson': poisson_noise_config,
+    'speckle': speckle_noise_config
 }
 
 # Train config
 # ------------------------------------------------------------------------------------------
 
 train_config = dnnlib.EasyDict(
-    iteration_count=300000,
+    iteration_count=100000,  # Value to modify: std=300,000
     eval_interval=1000,
     minibatch_size=4,
     run_func_name="train.train",
@@ -123,8 +127,8 @@ if __name__ == "__main__":
             n2n = args.noise2noise if 'noise2noise' in args else True
             train_config.noise2noise = n2n
             if 'long_train' in args and args.long_train:
-                train_config.iteration_count = 50000 # Modified : original = 500.000
-                train_config.eval_interval = 500
+                train_config.iteration_count = 500000
+                train_config.eval_interval = 1000
                 train_config.ramp_down_perc = 0.5
         else:
             print ('running with defaults in train_config')
