@@ -28,9 +28,9 @@ def load_image(fname):
         size_stats['< 256x256'] += 1
     else:
         size_stats['>= 256x256'] += 1
-    arr = np.array(im.convert('RGB'), dtype=np.uint8)
-    assert len(arr.shape) == 3
-    return arr.transpose([2, 0, 1])
+    arr = np.array(im.convert('L'), dtype=np.uint8) # 'L' for Black and White
+    assert len(arr.shape) == 2
+    return arr
 
 
 def shape_feature(v):
