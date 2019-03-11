@@ -50,8 +50,8 @@ poisson_noise_config = dnnlib.EasyDict(
 )
 speckle_noise_config = dnnlib.EasyDict(
     func_name='train.AugmentSpeckle',
-    L=1,
-    quick_noise_computation=True
+    l=1,
+    quick_noise_computation=False
 )
 
 # ------------------------------------------------------------------------------------------
