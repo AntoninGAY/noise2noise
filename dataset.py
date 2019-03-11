@@ -34,7 +34,8 @@ def resize_small_image(x):
      )
 
 def random_crop_noised_clean(x, add_noise):
-    cropped = tf.random_crop(resize_small_image(x), size=[3, 256, 256]) / 255.0 - 0.5
+    # cropped = tf.random_crop(resize_small_image(x), size=[3, 256, 256]) / 255.0 - 0.5     #Modified for BW
+    cropped = tf.random_crop(resize_small_image(x), size=[1, 256, 256]) / 255.0 - 0.5
     return (add_noise(cropped), add_noise(cropped), cropped)
 
 def create_dataset(train_tfrecords, minibatch_size, add_noise):

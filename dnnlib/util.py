@@ -44,7 +44,9 @@ class EasyDict(dict):
 
 
 class Logger(object):
-    """Redirect stderr to stdout, optionally print stdout to a file, and optionally force flushing on both stdout and the file."""
+    """ Redirect stderr to stdout, optionally print stdout to a file,
+    and optionally force flushing on both stdout and the file.
+    """
 
     def __init__(self, file_name: str = None, file_mode: str = "w", should_flush: bool = True):
         self.file = None
@@ -67,7 +69,7 @@ class Logger(object):
 
     def write(self, text: str) -> None:
         """Write text to stdout (and a file) and optionally flush."""
-        if len(text) == 0: # workaround for a bug in VSCode debugger: sys.stdout.write(''); sys.stdout.flush() => crash
+        if len(text) == 0:  # workaround for a bug in VSCode debugger: sys.stdout.write(''); sys.stdout.flush() => crash
             return
 
         if self.file is not None:
@@ -152,8 +154,10 @@ _str_to_ctype = {
 
 
 def get_dtype_and_ctype(type_obj: Any) -> Tuple[np.dtype, Any]:
-    """Given a type name string (or an object having a __name__ attribute), return matching Numpy and ctypes types that have the same size in bytes."""
-    type_str = None
+    """ Given a type name string (or an object having a __name__ attribute),
+    return matching Numpy and ctypes types that have the same size in bytes.
+    """
+    # type_str = None
 
     if isinstance(type_obj, str):
         type_str = type_obj
@@ -179,7 +183,7 @@ def is_pickleable(obj: Any) -> bool:
         with io.BytesIO() as stream:
             pickle.dump(obj, stream)
         return True
-    except:
+    except IOError:
         return False
 
 
@@ -241,7 +245,8 @@ def get_module_dir_by_obj_name(obj_name: str) -> str:
 # File system helpers
 # ------------------------------------------------------------------------------------------
 
-def list_dir_recursively_with_ignore(dir_path: str, ignores: List[str] = None, add_base_to_relative: bool = False) -> List[Tuple[str, str]]:
+def list_dir_recursively_with_ignore(dir_path: str, ignores: List[str] = None, add_base_to_relative: bool = False) -> \
+        List[Tuple[str, str]]:
     """List all files recursively in a given directory while ignoring given file and directory names.
     Returns list of tuples containing both absolute and relative paths."""
     assert os.path.isdir(dir_path)
