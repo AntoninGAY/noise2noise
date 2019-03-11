@@ -20,8 +20,6 @@ from util import save_image, save_snapshot
 from validation import ValidationSet
 from dataset import create_dataset
 
-from tqdm import tqdm
-
 
 class AugmentGaussian:
     def __init__(self, validation_stddev, train_stddev_rng_range):
@@ -47,12 +45,12 @@ class AugmentPoisson:
         chi_rng = tf.random_uniform(shape=[1, 1, 1], minval=0.001, maxval=self.lam_max)
         return tf.random_poisson(chi_rng * (x + 0.5), shape=[]) / chi_rng - 0.5
 
-    def add_validation_noise_np(self, x):
+    @staticmethod
+    def add_validation_noise_np(x):
         chi = 30.0
         return np.random.poisson(chi * (x + 0.5)) / chi - 0.5
 
 
-# TODO: complete function Speckle, as an additive zero-mean noise
 class AugmentSpeckle:
     """ This class add speckle noise to an image which is already on its log form
 
@@ -61,8 +59,8 @@ class AugmentSpeckle:
     at the creation of the object, and on method call, a random one of them is added
     """
 
-    def __init__(self, L, normalize=False, norm_max=1., norm_min=0., quick_noise_computation=False):
-        self.L = L
+    def __init__(self, l, normalize=False, norm_max=1., norm_min=0., quick_noise_computation=False):
+        self.L = l
         self.normalize = normalize
         self.norm_max = norm_max
         self.norm_min = norm_min
@@ -215,6 +213,7 @@ def train(
     validation_set.load(**validation_config)
 
     # Create a run context (hides low level details, exposes simple API to manage the run)
+    # noinspection PyTypeChecker
     ctx = dnnlib.RunContext(submit_config, config)
 
     # Initialize TensorFlow graph and session using good default settings
