@@ -50,7 +50,8 @@ poisson_noise_config = dnnlib.EasyDict(
 )
 speckle_noise_config = dnnlib.EasyDict(
     func_name='train.AugmentSpeckle',
-    L=20
+    L=1,
+    quick_noise_computation=True
 )
 
 # ------------------------------------------------------------------------------------------
@@ -73,7 +74,7 @@ corruption_types = {
 # ------------------------------------------------------------------------------------------
 
 train_config = dnnlib.EasyDict(
-    iteration_count=100000,  # Value to modify: std=300,000
+    iteration_count=10000,  # Value to modify: std=300,000
     eval_interval=1000,
     minibatch_size=4,
     run_func_name="train.train",

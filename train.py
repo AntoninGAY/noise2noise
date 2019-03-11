@@ -60,16 +60,18 @@ class AugmentSpeckle:
     In fact, this method was too long. Thus, a list of additive realizations of the speckle noise is computed and saved
     at the creation of the object, and on method call, a random one of them is added
     """
-    def __init__(self, L, shape=(256, 256), normalize=False, norm_max=1., norm_min=0., nb_realisation=100):
+
+    def __init__(self, L, normalize=False, norm_max=1., norm_min=0., quick_noise_computation=False):
         self.L = L
         self.normalize = normalize
         self.norm_max = norm_max
         self.norm_min = norm_min
 
-        self.noise_list = []
-        for _ in tqdm(range(nb_realisation), desc='Speckle noise init'):
-            self.noise_list.append(self.generate_validation_noise_np(shape))
+        # Recommanded if L >> 1 (L > 5)
+        self.quick_noise = quick_noise_computation
 
+        if self.quick_noise:
+            self.noise_sample = self.generate_validation_noise_np(shape=(10000 * 10000))
 
     def add_train_noise_tf(self, im_log):
         """ Add noise to training dataset.
@@ -82,32 +84,35 @@ class AugmentSpeckle:
         :return:
         """
 
-        # We compute the Speckle noise
-        s = tf.zeros(shape=tf.shape(im_log))
-        for k in range(0, self.L):
-            gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(im_log), stddev=1),
-                                       tf.random_normal(shape=tf.shape(im_log), stddev=1))) ** 2) / 2
-            s = s + gamma
-        s_amplitude = tf.sqrt(s / self.L)
-        log_speckle = tf.log(s_amplitude)
-        if self.normalize:
-            log_speckle = log_speckle / (self.norm_max - self.norm_min)
+        if self.quick_noise:
+            # If quick noise computation, we pick the noise from pre-computed list
+            log_speckle = np.random.choice(self.noise_sample, size=im_log.shape)
+        else:
+            # Otherwise, we compute the Speckle noise
+
+            s = tf.zeros(shape=tf.shape(im_log))
+            for k in range(0, self.L):
+                gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(im_log), stddev=1),
+                                           tf.random_normal(shape=tf.shape(im_log), stddev=1))) ** 2) / 2
+                s = s + gamma
+            s_amplitude = tf.sqrt(s / self.L)
+            log_speckle = tf.log(s_amplitude)
+            if self.normalize:
+                log_speckle = log_speckle / (self.norm_max - self.norm_min)
 
         # The biased noisy image
         y = im_log + log_speckle
 
         # We unbiased the image
-        return y
-        # TODO: reuse bias
-        # return self.add_bias(y)
+        return self.add_bias_tf(y)
 
     def generate_validation_noise_np(self, shape):
         # We compute the Speckle noise
 
         s = np.zeros(shape=shape)
         for k in range(0, self.L):
-            gamma = (np.abs(np.complex(np.random.normal(size=shape, scale=1.),
-                                       np.random.normal(size=shape, scale=1.))) ** 2) / 2
+            gamma = (np.abs(np.random.normal(size=shape, scale=1.) +
+                            1j * np.random.normal(size=shape, scale=1.)) ** 2) / 2
             s = s + gamma
 
         s_amplitude = np.sqrt(s / self.L)
@@ -116,9 +121,7 @@ class AugmentSpeckle:
             log_speckle = log_speckle / (self.norm_max - self.norm_min)
 
         # We unbiased the image
-        return log_speckle
-        # TODO: reuse bias
-        # return self.add_bias_tf(log_speckle)
+        return self.add_bias_np(log_speckle)
 
     def add_validation_noise_np(self, im_log):
         """ Add noise to training dataset.
@@ -131,37 +134,28 @@ class AugmentSpeckle:
         :return:
         """
 
-        # We compute the Speckle noise
+        if self.quick_noise:
+            # If quick noise computation, we pick the noise from pre-computed list
+            log_speckle = np.random.choice(self.noise_sample, size=im_log.shape)
+        else:
+            # Otherwise, we compute the Speckle noise
 
-        # s = np.zeros(shape=np.shape(im_log))
-        # for k in range(0, self.L):
-        #     gamma = (np.abs(np.complex(np.random.normal(size=np.shape(im_log), scale=1),
-        #                                np.random.normal(size=np.shape(im_log), scale=1))) ** 2) / 2
-        #     s = s + gamma
-        #
-        # s_amplitude = np.sqrt(s / self.L)
-        # log_speckle = np.log(s_amplitude)
-        # if self.normalize:
-        #     log_speckle = log_speckle / (self.norm_max - self.norm_min)
+            s = np.zeros(shape=np.shape(im_log))
+            for k in range(0, self.L):
+                gamma = (np.abs(np.random.normal(size=np.shape(im_log), scale=1) +
+                                1j * np.random.normal(size=np.shape(im_log), scale=1)) ** 2) / 2
+                s = s + gamma
+
+            s_amplitude = np.sqrt(s / self.L)
+            log_speckle = np.log(s_amplitude)
+            if self.normalize:
+                log_speckle = log_speckle / (self.norm_max - self.norm_min)
 
         # The biased noisy image
-        log_noise = self.noise_list[np.random.randint(0, len(self.noise_list))]
-        y = im_log + log_noise
+        y = im_log + log_speckle
 
         # We unbiased the image
-        return y
-        # TODO: reuse bias
-        # return self.add_bias_np(y)
-
-    @staticmethod
-    def image_to_log(x):
-        """ Returns the log of an image
-
-        :param x:
-        :return:
-        """
-
-        return tf.log(x)
+        return self.add_bias_np(y)
 
     @staticmethod
     def add_bias_tf(x, bias=None):
@@ -294,7 +288,8 @@ def train(
             print('iter %-10d time %-12s eta %-12s sec/eval %-7.1f sec/iter %-7.2f maintenance %-6.1f' % (
                 autosummary('Timing/iter', i),
                 dnnlib.util.format_time(autosummary('Timing/total_sec', time_total)),
-                dnnlib.util.format_time(autosummary('Timing/total_sec', time_train * (iteration_count - i))),
+                dnnlib.util.format_time(
+                    autosummary('Timing/total_sec', (time_train / eval_interval) * (iteration_count - i))),
                 autosummary('Timing/sec_per_eval', time_train),
                 autosummary('Timing/sec_per_iter', time_train / eval_interval),
                 autosummary('Timing/maintenance_sec', time_maintenance)))
