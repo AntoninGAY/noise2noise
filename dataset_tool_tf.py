@@ -77,6 +77,8 @@ def main():
     for (idx, imgname) in enumerate(images):
         print(idx, imgname)
         image = load_image(imgname)
+        if len(image.shape) == 2:
+            image = np.array([image])
         feature = {
             'shape': shape_feature(image.shape),
             'data': bytes_feature(tf.compat.as_bytes(image.tostring()))
