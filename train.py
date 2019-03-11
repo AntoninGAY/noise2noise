@@ -20,6 +20,8 @@ from util import save_image, save_snapshot
 from validation import ValidationSet
 from dataset import create_dataset
 
+from tqdm import tqdm
+
 
 class AugmentGaussian:
     def __init__(self, validation_stddev, train_stddev_rng_range):
@@ -52,11 +54,22 @@ class AugmentPoisson:
 
 # TODO: complete function Speckle, as an additive zero-mean noise
 class AugmentSpeckle:
-    def __init__(self, L, normalize=False, norm_max=1., norm_min=0.):
+    """ This class add speckle noise to an image which is already on its log form
+
+    For a reason of optimization, the validation noise is not computed when the method is called.
+    In fact, this method was too long. Thus, a list of additive realizations of the speckle noise is computed and saved
+    at the creation of the object, and on method call, a random one of them is added
+    """
+    def __init__(self, L, shape=(256, 256), normalize=False, norm_max=1., norm_min=0., nb_realisation=100):
         self.L = L
         self.normalize = normalize
         self.norm_max = norm_max
         self.norm_min = norm_min
+
+        self.noise_list = []
+        for _ in tqdm(range(nb_realisation), desc='Speckle noise init'):
+            self.noise_list.append(self.generate_validation_noise_np(shape))
+
 
     def add_train_noise_tf(self, im_log):
         """ Add noise to training dataset.
@@ -88,6 +101,25 @@ class AugmentSpeckle:
         # TODO: reuse bias
         # return self.add_bias(y)
 
+    def generate_validation_noise_np(self, shape):
+        # We compute the Speckle noise
+
+        s = np.zeros(shape=shape)
+        for k in range(0, self.L):
+            gamma = (np.abs(np.complex(np.random.normal(size=shape, scale=1.),
+                                       np.random.normal(size=shape, scale=1.))) ** 2) / 2
+            s = s + gamma
+
+        s_amplitude = np.sqrt(s / self.L)
+        log_speckle = np.log(s_amplitude)
+        if self.normalize:
+            log_speckle = log_speckle / (self.norm_max - self.norm_min)
+
+        # We unbiased the image
+        return log_speckle
+        # TODO: reuse bias
+        # return self.add_bias_tf(log_speckle)
+
     def add_validation_noise_np(self, im_log):
         """ Add noise to training dataset.
         Author: Emanuele Dalsasso <emanuele.dalsasso@telecom-paristech.fr>
@@ -95,32 +127,34 @@ class AugmentSpeckle:
         PAPER REFERENCE: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1000333
         "Statistical properties of logaritmically transformed speckle"
 
-        :param im_log: log of RGB image of size [3,256,256] TF
+        :param im_log: log of RGB image of size [3,256,256] NP
         :return:
         """
 
         # We compute the Speckle noise
 
-        s = tf.zeros(shape=tf.shape(im_log))
-        for k in range(0, self.L):
-            gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(im_log), stddev=1),
-                                       tf.random_normal(shape=tf.shape(im_log), stddev=1))) ** 2) / 2
-            s = s + gamma
-
-        s_amplitude = tf.sqrt(s / self.L)
-        log_speckle = tf.log(s_amplitude)
-        if self.normalize:
-            log_speckle = log_speckle / (self.norm_max - self.norm_min)
+        # s = np.zeros(shape=np.shape(im_log))
+        # for k in range(0, self.L):
+        #     gamma = (np.abs(np.complex(np.random.normal(size=np.shape(im_log), scale=1),
+        #                                np.random.normal(size=np.shape(im_log), scale=1))) ** 2) / 2
+        #     s = s + gamma
+        #
+        # s_amplitude = np.sqrt(s / self.L)
+        # log_speckle = np.log(s_amplitude)
+        # if self.normalize:
+        #     log_speckle = log_speckle / (self.norm_max - self.norm_min)
 
         # The biased noisy image
-        y = im_log + log_speckle
+        log_noise = self.noise_list[np.random.randint(0, len(self.noise_list))]
+        y = im_log + log_noise
 
         # We unbiased the image
-        return im_log
+        return y
         # TODO: reuse bias
-        # return self.add_bias(y)
+        # return self.add_bias_np(y)
 
-    def image_to_log(self, x):
+    @staticmethod
+    def image_to_log(x):
         """ Returns the log of an image
 
         :param x:
@@ -129,7 +163,8 @@ class AugmentSpeckle:
 
         return tf.log(x)
 
-    def add_bias(self, x, bias=None):
+    @staticmethod
+    def add_bias_tf(x, bias=None):
         """ Adds a bias to an image. If none given, automatically computed
 
         :param x:
@@ -140,6 +175,22 @@ class AugmentSpeckle:
 
         if bias is None:
             bias = (tf.log(4 / np.pi) - gamma) / 2.0
+            bias = - bias
+
+        return x + bias
+
+    @staticmethod
+    def add_bias_np(x, bias=None):
+        """ Adds a bias to an image. If none given, automatically computed
+
+        :param x:
+        :param bias:
+        """
+
+        gamma = 0.5772
+
+        if bias is None:
+            bias = (np.log(4 / np.pi) - gamma) / 2.0
             bias = - bias
 
         return x + bias
