@@ -69,7 +69,7 @@ class AugmentSpeckle:
         self.quick_noise = quick_noise_computation
 
         if self.quick_noise:
-            self.noise_sample = self.generate_validation_noise_np(shape=(10000 * 10000))
+            self.noise_sample = self.generate_validation_noise_np(shape=(1000 * 1000))
 
     def add_train_noise_tf(self, im_log):
         """ Add noise to training dataset.
@@ -96,7 +96,7 @@ class AugmentSpeckle:
             s_amplitude = tf.sqrt(s / self.L)
             log_speckle = tf.log(s_amplitude)
             if self.normalize:
-                log_speckle = log_speckle / (self.norm_max - self.norm_min)
+                log_speckle = log_speckle / 255.0
 
         # The biased noisy image
         y = im_log + log_speckle
@@ -116,7 +116,7 @@ class AugmentSpeckle:
         s_amplitude = np.sqrt(s / self.L)
         log_speckle = np.log(s_amplitude)
         if self.normalize:
-            log_speckle = log_speckle / (self.norm_max - self.norm_min)
+            log_speckle = log_speckle / 255.0
 
         # We unbiased the image
         return self.add_bias_np(log_speckle)
@@ -147,7 +147,7 @@ class AugmentSpeckle:
             s_amplitude = np.sqrt(s / self.L)
             log_speckle = np.log(s_amplitude)
             if self.normalize:
-                log_speckle = log_speckle / (self.norm_max - self.norm_min)
+                log_speckle = log_speckle / 255.0
 
         # The biased noisy image
         y = im_log + log_speckle
@@ -155,8 +155,7 @@ class AugmentSpeckle:
         # We unbiased the image
         return self.add_bias_np(y)
 
-    @staticmethod
-    def add_bias_tf(x, bias=None):
+    def add_bias_tf(self, x, bias=None):
         """ Adds a bias to an image. If none given, automatically computed
 
         :param x:
@@ -169,10 +168,16 @@ class AugmentSpeckle:
             bias = (tf.log(4 / np.pi) - gamma) / 2.0
             bias = - bias
 
+            # todo : Verify bias computation
+            bias = 0.0011 * 255.0
+
+            if self.normalize:
+                bias /= 255.0
+
+
         return x + bias
 
-    @staticmethod
-    def add_bias_np(x, bias=None):
+    def add_bias_np(self, x, bias=None):
         """ Adds a bias to an image. If none given, automatically computed
 
         :param x:
@@ -184,6 +189,13 @@ class AugmentSpeckle:
         if bias is None:
             bias = (np.log(4 / np.pi) - gamma) / 2.0
             bias = - bias
+
+            # todo : Verify bias computation
+            bias = 0.0011 * 255.0
+
+            if self.normalize:
+                bias /= 255.0
+
 
         return x + bias
 
