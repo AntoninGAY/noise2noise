@@ -13,7 +13,7 @@ def parse_tfrecord_tf(record):
     #     'shape': tf.FixedLenFeature([3], tf.int64),
     #     'data': tf.FixedLenFeature([], tf.string)})
     features = tf.parse_single_example(record, features={
-        'shape': tf.FixedLenFeature([2], tf.int64),
+        'shape': tf.FixedLenFeature([3], tf.int64),
         'data': tf.FixedLenFeature([], tf.string)})
     data = tf.decode_raw(features['data'], tf.uint8)
     return tf.reshape(data, features['shape'])

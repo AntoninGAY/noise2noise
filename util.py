@@ -34,12 +34,14 @@ def load_snapshot(fname):
 
 
 def save_image(submit_config, img_t, filename):
-    t = img_t.transpose([1, 2, 0])  # [RGB, H, W] -> [H, W, RGB]
+    # t = img_t.transpose([1, 2, 0])  # [RGB, H, W] -> [H, W, RGB]  # Modified for BW
+    t = img_t[0]
     if t.dtype in [np.float32, np.float64]:
         t = clip_to_uint8(t)
     else:
         assert t.dtype == np.uint8
-    PIL.Image.fromarray(t, 'RGB').save(os.path.join(submit_config.run_dir, filename))
+    # PIL.Image.fromarray(t, 'RGB').save(os.path.join(submit_config.run_dir, filename)) # Modified for BW
+    PIL.Image.fromarray(t, 'L').save(os.path.join(submit_config.run_dir, filename))
 
 def clip_to_uint8(arr):
     return np.clip((arr + 0.5) * 255.0 + 0.5, 0, 255).astype(np.uint8)

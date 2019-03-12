@@ -117,8 +117,8 @@ def finalize_autosummaries() -> None:
                 moments = tf.add_n(vars_list)
                 moments /= moments[0]
                 with tf.control_dependencies([moments]):  # read before resetting
-                    # reset_ops = [tf.assign(var, tf.zeros(3, dtype=_dtype)) for var in vars_list]  # Modified for BW
-                    reset_ops = [tf.assign(var, tf.zeros(1, dtype=_dtype)) for var in vars_list]
+                    reset_ops = [tf.assign(var, tf.zeros(3, dtype=_dtype)) for var in vars_list]  # Modified for BW
+                    # reset_ops = [tf.assign(var, tf.zeros(1, dtype=_dtype)) for var in vars_list]
                     with tf.name_scope(None), tf.control_dependencies(reset_ops):  # reset before reporting
                         mean = moments[1]
                         std = tf.sqrt(moments[2] - tf.square(moments[1]))
