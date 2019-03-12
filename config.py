@@ -79,8 +79,8 @@ corruption_types = {
 # ------------------------------------------------------------------------------------------
 
 train_config = dnnlib.EasyDict(
-    iteration_count=50000,  # Value to modify: std=300,000
-    eval_interval=5000,
+    iteration_count=10001,  # Value to modify: std=300,000
+    eval_interval=1000,
     minibatch_size=4,
     run_func_name="train.train",
     learning_rate=0.0003,
