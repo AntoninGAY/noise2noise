@@ -45,7 +45,8 @@ def maxpool2d(x, k=2):
 # TODO use fused upscale+conv2d from gan2
 def upscale2d(x, factor=2):
     assert isinstance(factor, int) and factor >= 1
-    if factor == 1: return x
+    if factor == 1:
+        return x
     with tf.variable_scope('Upscale2D'):
         s = x.shape
         x = tf.reshape(x, [-1, s[1], s[2], 1, s[3], 1])

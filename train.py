@@ -174,7 +174,6 @@ class AugmentSpeckle:
             if self.normalize:
                 bias /= 255.0
 
-
         return x + bias
 
     def add_bias_np(self, x, bias=None):
@@ -195,7 +194,6 @@ class AugmentSpeckle:
 
             if self.normalize:
                 bias /= 255.0
-
 
         return x + bias
 
