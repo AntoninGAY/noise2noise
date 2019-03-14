@@ -1,3 +1,5 @@
+matplotlib
+imageio
 tensorflow  # Tricky intallation -see README
 numpy
 tqdm

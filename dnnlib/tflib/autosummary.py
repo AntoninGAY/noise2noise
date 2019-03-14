@@ -32,6 +32,8 @@ from . import tfutil
 from .tfutil import TfExpression
 from .tfutil import TfExpressionEx
 
+import config
+
 _dtype = tf.float64
 _vars = OrderedDict()  # name => [var, ...]
 _immediate = OrderedDict()  # name => update_op, update_value
@@ -58,6 +60,7 @@ def _create_var(name: str, value_expr: TfExpression) -> TfExpression:
         v = [size_expr, v, tf.square(v)]
     else:
         v = [size_expr, tf.reduce_sum(v), tf.reduce_sum(tf.square(v))]
+
     v = tf.cond(tf.is_finite(v[1]), lambda: tf.stack(v), lambda: tf.zeros(3, dtype=_dtype))
 
     with tfutil.absolute_name_scope("Autosummary/" + name_id), tf.control_dependencies(None):
@@ -115,7 +118,9 @@ def finalize_autosummaries() -> None:
                 moments = tf.add_n(vars_list)
                 moments /= moments[0]
                 with tf.control_dependencies([moments]):  # read before resetting
+
                     reset_ops = [tf.assign(var, tf.zeros(3, dtype=_dtype)) for var in vars_list]
+
                     with tf.name_scope(None), tf.control_dependencies(reset_ops):  # reset before reporting
                         mean = moments[1]
                         std = tf.sqrt(moments[2] - tf.square(moments[1]))

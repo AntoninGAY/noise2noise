@@ -13,6 +13,13 @@ import dnnlib.submission.submit as submit
 
 import validation
 
+NB_CHANNEL = 1
+
+
+def get_nb_channels():
+    return NB_CHANNEL
+
+
 # Submit config
 # ------------------------------------------------------------------------------------------
 
@@ -51,18 +58,29 @@ poisson_noise_config = dnnlib.EasyDict(
 speckle_noise_config = dnnlib.EasyDict(
     func_name='train.AugmentSpeckle',
     l=1,
-    quick_noise_computation=False
+    quick_noise_computation=False,
+    normalize=True
 )
 
 # ------------------------------------------------------------------------------------------
 # Preconfigured validation sets
 datasets = {
-    'kodak':  dnnlib.EasyDict(dataset_dir='datasets/kodak'),
+    'kodak': dnnlib.EasyDict(dataset_dir='datasets/kodak'),
     'bsd300': dnnlib.EasyDict(dataset_dir='datasets/bsd300'),
-    'set14':  dnnlib.EasyDict(dataset_dir='datasets/set14')
+    'mva-sar': dnnlib.EasyDict(dataset_dir='datasets/mva-sar'),
+    'mva-sar-train': dnnlib.EasyDict(dataset_dir='datasets/mva-sar/train'),
+    'mva-sar-val': dnnlib.EasyDict(dataset_dir='datasets/mva-sar/val'),
+    'set14': dnnlib.EasyDict(dataset_dir='datasets/set14')
 }
 
 default_validation_config = datasets['kodak']
+mva_sar_validation_config = datasets['mva-sar-val']
+
+val_datasets = {
+    'default': default_validation_config,
+    'kodak': default_validation_config,
+    'mva-sar': mva_sar_validation_config
+}
 
 corruption_types = {
     'gaussian': gaussian_noise_config,
@@ -75,13 +93,13 @@ corruption_types = {
 
 train_config = dnnlib.EasyDict(
     iteration_count=10000,  # Value to modify: std=300,000
-    eval_interval=1000,
+    eval_interval=100,
     minibatch_size=4,
     run_func_name="train.train",
     learning_rate=0.0003,
     ramp_down_perc=0.3,
     noise=gaussian_noise_config,
-#    noise=poisson_noise_config,
+    #    noise=poisson_noise_config,
     noise2noise=True,
     train_tfrecords='datasets/imagenet_val_raw.tfrecords',
     validation_config=default_validation_config
@@ -96,13 +114,15 @@ validate_config = dnnlib.EasyDict(
     noise=gaussian_noise_config
 )
 
+
 # ------------------------------------------------------------------------------------------
 
 # jhellsten quota group
 
 def error(*print_args):
-    print (*print_args)
+    print(*print_args)
     sys.exit(1)
+
 
 def str2bool(v):
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
@@ -112,8 +132,9 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
+
 # ------------------------------------------------------------------------------------------
-examples='''examples:
+examples = '''examples:
 
   # Train a network using the BSD300 dataset:
   python %(prog)s train --train-tfrecords=datasets/bsd300.tfrecords
@@ -131,8 +152,9 @@ if __name__ == "__main__":
                 train_config.iteration_count = 500000
                 train_config.eval_interval = 1000
                 train_config.ramp_down_perc = 0.5
+
         else:
-            print ('running with defaults in train_config')
+            print('running with defaults in train_config')
 
         # Type of noise selection
         noise = 'gaussian'
@@ -151,12 +173,21 @@ if __name__ == "__main__":
         if 'train_tfrecords' in args and args.train_tfrecords is not None:
             train_config.train_tfrecords = submit.get_path_from_template(args.train_tfrecords)
 
-        print (train_config)
+        val_dir = 'default'
+        if 'val_dir' in args:
+            if args.val_dir not in val_datasets:
+                error('Unknown noise type', args.val_dir)
+            else:
+                val_dir = args.val_dir
+            train_config.validation_config = val_datasets[val_dir]
+
+        print(train_config)
         dnnlib.submission.submit.submit_run(submit_config, **train_config)
+
 
     def validate(args):
         if submit_config.submit_target != dnnlib.SubmitTarget.LOCAL:
-            print ('Command line overrides currently supported only in local runs for the validate subcommand')
+            print('Command line overrides currently supported only in local runs for the validate subcommand')
             sys.exit(1)
         if args.dataset_dir is None:
             error('Must select dataset with --dataset-dir')
@@ -172,9 +203,10 @@ if __name__ == "__main__":
         validate_config.network_snapshot = args.network_snapshot
         dnnlib.submission.submit.submit_run(submit_config, **validate_config)
 
+
     def infer_image(args):
         if submit_config.submit_target != dnnlib.SubmitTarget.LOCAL:
-            print ('Command line overrides currently supported only in local runs for the validate subcommand')
+            print('Command line overrides currently supported only in local runs for the validate subcommand')
             sys.exit(1)
         if args.image is None:
             error('Must specify image file with --image')
@@ -186,6 +218,7 @@ if __name__ == "__main__":
         # testing, not for long-running training or validation runs.
         validation.infer_image(args.network_snapshot, args.image, args.out)
 
+
     # Train by default
     parser = argparse.ArgumentParser(
         description='Train a network or run a set of images through a trained network.',
@@ -193,22 +226,33 @@ if __name__ == "__main__":
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument('--desc', default='', help='Append desc to the run descriptor string')
-    parser.add_argument('--run-dir-root', help='Working dir for a training or a validation run. Will contain training and validation results.')
+    parser.add_argument('--run-dir-root',
+                        help='Working dir for a training or a validation run. Will contain training and validation results.')
     subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
+
+    # Parser Train
     parser_train = subparsers.add_parser('train', help='Train a network')
-    parser_train.add_argument('--noise2noise', nargs='?', type=str2bool, const=True, default=True, help='Noise2noise (--noise2noise=true) or noise2clean (--noise2noise=false).  Default is noise2noise=true.')
-    parser_train.add_argument('--noise', default='gaussian', help='Type of noise corruption (one of: gaussian, poisson)')
-    parser_train.add_argument('--long-train', default=False, help='Train for a very long time (500k iterations or 500k*minibatch image)')
+    parser_train.add_argument('--noise2noise', nargs='?', type=str2bool, const=True, default=True,
+                              help='Noise2noise (--noise2noise=true) or noise2clean (--noise2noise=false).  Default is noise2noise=true.')
+    parser_train.add_argument('--noise', default='gaussian',
+                              help='Type of noise corruption (one of: gaussian, poisson)')
+    parser_train.add_argument('--long-train', default=False,
+                              help='Train for a very long time (500k iterations or 500k*minibatch image)')
     parser_train.add_argument('--train-tfrecords', help='Filename of the training set tfrecords file')
+    parser_train.add_argument('--val-dir', help='Validation images directory')
     parser_train.set_defaults(func=train)
 
+    # Parser Validate
     parser_validate = subparsers.add_parser('validate', help='Run a set of images through the network')
     parser_validate.add_argument('--dataset-dir', help='Load all images from a directory (*.png, *.jpg/jpeg, *.bmp)')
     parser_validate.add_argument('--network-snapshot', help='Trained network pickle')
-    parser_validate.add_argument('--noise', default='gaussian', help='Type of noise corruption (one of: gaussian, poisson)')
+    parser_validate.add_argument('--noise', default='gaussian',
+                                 help='Type of noise corruption (one of: gaussian, poisson)')
     parser_validate.set_defaults(func=validate)
 
-    parser_infer_image = subparsers.add_parser('infer-image', help='Run one image through the network without adding any noise')
+    # Parser Infer Image
+    parser_infer_image = subparsers.add_parser('infer-image',
+                                               help='Run one image through the network without adding any noise')
     parser_infer_image.add_argument('--image', help='Image filename')
     parser_infer_image.add_argument('--out', help='Output filename')
     parser_infer_image.add_argument('--network-snapshot', help='Trained network pickle')
