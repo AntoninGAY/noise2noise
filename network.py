@@ -8,6 +8,8 @@
 import tensorflow as tf
 import numpy as np
 
+import config
+
 
 # ----------------------------------------------------------------------------
 # Get/create weight tensor for a convolutional or fully-connected layer.
@@ -57,19 +59,25 @@ def upscale2d(x, factor=2):
 
 def conv_lr(name, x, fmaps):
     with tf.variable_scope(name):
-        # return tf.nn.leaky_relu(conv2d_bias(x, fmaps, 3), alpha=0.1)  #Modified for BW
-        return tf.nn.leaky_relu(conv2d_bias(x, fmaps, 1), alpha=0.1)
+        if config.get_nb_channels() == 1:
+            return tf.nn.leaky_relu(conv2d_bias(x, fmaps, 1), alpha=0.1)
+        else:
+            return tf.nn.leaky_relu(conv2d_bias(x, fmaps, 3), alpha=0.1)
 
 
 def conv(name, x, fmaps, gain):
     with tf.variable_scope(name):
-        # return conv2d_bias(x, fmaps, 3, gain) # Modified for BW
-        return conv2d_bias(x, fmaps, 1, gain)
+        if config.get_nb_channels() == 1:
+            return conv2d_bias(x, fmaps, 1, gain)
+        else:
+            return conv2d_bias(x, fmaps, 3, gain)
 
 
 def autoencoder(x, width=256, height=256, **_kwargs):
-    # x.set_shape([None, 3, height, width]) # Modified for BW
-    x.set_shape([None, 1, height, width])
+    if config.get_nb_channels() == 1:
+        x.set_shape([None, 1, height, width])
+    else:
+        x.set_shape([None, 3, height, width])
 
     skips = [x]
 
@@ -121,7 +129,9 @@ def autoencoder(x, width=256, height=256, **_kwargs):
     n = conv_lr('dec_conv1a', n, 64)
     n = conv_lr('dec_conv1b', n, 32)
 
-    # n = conv('dec_conv1', n, 3, gain=1.0) # Modified for BW
-    n = conv('dec_conv1', n, 1, gain=1.0)
+    if config.get_nb_channels() == 1:
+        n = conv('dec_conv1', n, 1, gain=1.0)
+    else:
+        n = conv('dec_conv1', n, 3, gain=1.0)
 
     return n

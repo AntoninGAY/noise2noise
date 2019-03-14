@@ -13,6 +13,13 @@ import dnnlib.submission.submit as submit
 
 import validation
 
+NB_CHANNEL = 1
+
+
+def get_nb_channels():
+    return NB_CHANNEL
+
+
 # Submit config
 # ------------------------------------------------------------------------------------------
 
@@ -69,6 +76,12 @@ datasets = {
 default_validation_config = datasets['kodak']
 mva_sar_validation_config = datasets['mva-sar-val']
 
+val_datasets = {
+    'default': default_validation_config,
+    'kodak': default_validation_config,
+    'mva-sar': mva_sar_validation_config
+}
+
 corruption_types = {
     'gaussian': gaussian_noise_config,
     'poisson': poisson_noise_config,
@@ -79,8 +92,8 @@ corruption_types = {
 # ------------------------------------------------------------------------------------------
 
 train_config = dnnlib.EasyDict(
-    iteration_count=100001,  # Value to modify: std=300,000
-    eval_interval=1000,
+    iteration_count=10000,  # Value to modify: std=300,000
+    eval_interval=100,
     minibatch_size=4,
     run_func_name="train.train",
     learning_rate=0.0003,
@@ -89,7 +102,7 @@ train_config = dnnlib.EasyDict(
     #    noise=poisson_noise_config,
     noise2noise=True,
     train_tfrecords='datasets/imagenet_val_raw.tfrecords',
-    validation_config=mva_sar_validation_config
+    validation_config=default_validation_config
 )
 
 # Validation run config
@@ -139,6 +152,7 @@ if __name__ == "__main__":
                 train_config.iteration_count = 500000
                 train_config.eval_interval = 1000
                 train_config.ramp_down_perc = 0.5
+
         else:
             print('running with defaults in train_config')
 
@@ -158,6 +172,14 @@ if __name__ == "__main__":
 
         if 'train_tfrecords' in args and args.train_tfrecords is not None:
             train_config.train_tfrecords = submit.get_path_from_template(args.train_tfrecords)
+
+        val_dir = 'default'
+        if 'val_dir' in args:
+            if args.val_dir not in val_datasets:
+                error('Unknown noise type', args.val_dir)
+            else:
+                val_dir = args.val_dir
+            train_config.validation_config = val_datasets[val_dir]
 
         print(train_config)
         dnnlib.submission.submit.submit_run(submit_config, **train_config)
@@ -207,6 +229,8 @@ if __name__ == "__main__":
     parser.add_argument('--run-dir-root',
                         help='Working dir for a training or a validation run. Will contain training and validation results.')
     subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
+
+    # Parser Train
     parser_train = subparsers.add_parser('train', help='Train a network')
     parser_train.add_argument('--noise2noise', nargs='?', type=str2bool, const=True, default=True,
                               help='Noise2noise (--noise2noise=true) or noise2clean (--noise2noise=false).  Default is noise2noise=true.')
@@ -215,8 +239,10 @@ if __name__ == "__main__":
     parser_train.add_argument('--long-train', default=False,
                               help='Train for a very long time (500k iterations or 500k*minibatch image)')
     parser_train.add_argument('--train-tfrecords', help='Filename of the training set tfrecords file')
+    parser_train.add_argument('--val-dir', help='Validation images directory')
     parser_train.set_defaults(func=train)
 
+    # Parser Validate
     parser_validate = subparsers.add_parser('validate', help='Run a set of images through the network')
     parser_validate.add_argument('--dataset-dir', help='Load all images from a directory (*.png, *.jpg/jpeg, *.bmp)')
     parser_validate.add_argument('--network-snapshot', help='Trained network pickle')
@@ -224,6 +250,7 @@ if __name__ == "__main__":
                                  help='Type of noise corruption (one of: gaussian, poisson)')
     parser_validate.set_defaults(func=validate)
 
+    # Parser Infer Image
     parser_infer_image = subparsers.add_parser('infer-image',
                                                help='Run one image through the network without adding any noise')
     parser_infer_image.add_argument('--image', help='Image filename')

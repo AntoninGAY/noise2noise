@@ -70,7 +70,7 @@ class AugmentSpeckle:
         self.quick_noise = quick_noise_computation
 
         if self.quick_noise:
-            self.noise_sample = self.generate_validation_noise_np(shape=(1000 * 1000))
+            self.noise_sample = self.generate_validation_noise_np(shape=(512 * 512))
 
     def add_train_noise_tf(self, im_log):
         """ Add noise to training dataset.

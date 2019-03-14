@@ -38,11 +38,19 @@ class ValidationSet:
         images = []
         for fname in fnames:
             try:
-                # im = PIL.Image.open(fname).convert('RGB') # Modified for BW
-                im = PIL.Image.open(fname).convert('L')
+                if config.get_nb_channels() == 1:
+                    im = PIL.Image.open(fname).convert('L')
+                else:
+                    im = PIL.Image.open(fname).convert('RGB')
+
                 arr = np.array(im, dtype=np.float32)
-                # reshaped = arr.transpose([2, 0, 1]) / 255.0 - 0.5 # Modified for BW
-                reshaped = np.array([arr / 255.0 - 0.5])
+
+                # If only one channel, we can have arr.shape = (256, 256) instead of (1, 256, 256) or (256, 256, 1)
+                if len(arr.shape) == 2:
+                    reshaped = np.array([arr / 255.0 - 0.5])
+                else:
+                    reshaped = arr.transpose([2, 0, 1]) / 255.0 - 0.5
+
                 images.append(reshaped)
             except OSError as e:
                 print('Skipping file', fname, 'due to error: ', e)

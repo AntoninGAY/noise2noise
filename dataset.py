@@ -6,6 +6,7 @@
 # Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 import tensorflow as tf
+import config
 
 
 def parse_tfrecord_tf(record):
@@ -43,9 +44,11 @@ def resize_small_image(x):
 
 
 def random_crop_noised_clean(x, add_noise):
-    # cropped = tf.random_crop(resize_small_image(x), size=[3, 256, 256]) / 255.0 - 0.5     #Modified for BW
-    cropped = tf.random_crop(resize_small_image(x), size=[1, 256, 256]) / 255.0 - 0.5
-    return (add_noise(cropped), add_noise(cropped), cropped)
+    if config.get_nb_channels() == 1:
+        cropped = tf.random_crop(resize_small_image(x), size=[1, 256, 256]) / 255.0 - 0.5
+    else:
+        cropped = tf.random_crop(resize_small_image(x), size=[3, 256, 256]) / 255.0 - 0.5
+    return add_noise(cropped), add_noise(cropped), cropped
 
 
 def create_dataset(train_tfrecords, minibatch_size, add_noise):
