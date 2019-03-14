@@ -22,6 +22,7 @@ from dataset import create_dataset
 
 from scipy import special
 
+
 class AugmentGaussian:
     def __init__(self, validation_stddev, train_stddev_rng_range):
         self.validation_stddev = validation_stddev
@@ -60,8 +61,8 @@ class AugmentSpeckle:
     at the creation of the object, and on method call, a random one of them is added
     """
 
-    def __init__(self, l, normalize=False, norm_max=10.089, norm_min=-1.423, quick_noise_computation=False):
-        self.L = l
+    def __init__(self, l_nb_views, normalize=False, norm_max=10.089, norm_min=-1.423, quick_noise_computation=False):
+        self.L = l_nb_views
         self.normalize = normalize
         self.norm_max = norm_max
         self.norm_min = norm_min

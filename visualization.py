@@ -68,4 +68,4 @@ def log_validation_plot(path, l, id_image=None):
 
 if __name__ == '__main__':
     l = 5
-    log_validation_plot('results/00018-autoencoder', l, [0, 25, 50])
+    log_validation_plot('results/00025-autoencoder', l, [0, 10, 16])

@@ -32,8 +32,6 @@ from . import tfutil
 from .tfutil import TfExpression
 from .tfutil import TfExpressionEx
 
-import config
-
 _dtype = tf.float64
 _vars = OrderedDict()  # name => [var, ...]
 _immediate = OrderedDict()  # name => update_op, update_value
@@ -156,6 +154,7 @@ def finalize_autosummaries() -> None:
         categories.append(layout_pb2.Category(title=cat_name, chart=charts))
     layout = summary_lib.custom_scalar_pb(layout_pb2.Layout(category=categories))
     return layout
+
 
 def save_summaries(file_writer, global_step=None):
     """Call FileWriter.add_summary() with all summaries in the default graph,

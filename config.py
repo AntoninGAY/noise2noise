@@ -13,7 +13,7 @@ import dnnlib.submission.submit as submit
 
 import validation
 
-NB_CHANNEL = 1
+NB_CHANNEL = 3
 
 
 def get_nb_channels():
@@ -57,7 +57,7 @@ poisson_noise_config = dnnlib.EasyDict(
 )
 speckle_noise_config = dnnlib.EasyDict(
     func_name='train.AugmentSpeckle',
-    l=1,
+    l_nb_views=1,
     quick_noise_computation=False,
     normalize=True
 )
@@ -92,8 +92,8 @@ corruption_types = {
 # ------------------------------------------------------------------------------------------
 
 train_config = dnnlib.EasyDict(
-    iteration_count=10000,  # Value to modify: std=300,000
-    eval_interval=100,
+    iteration_count=100000,  # Value to modify: std=300,000
+    eval_interval=1000,
     minibatch_size=4,
     run_func_name="train.train",
     learning_rate=0.0003,
@@ -176,7 +176,7 @@ if __name__ == "__main__":
         val_dir = 'default'
         if 'val_dir' in args:
             if args.val_dir not in val_datasets:
-                error('Unknown noise type', args.val_dir)
+                error('Unknown validation directory', args.val_dir)
             else:
                 val_dir = args.val_dir
             train_config.validation_config = val_datasets[val_dir]
@@ -227,19 +227,21 @@ if __name__ == "__main__":
     )
     parser.add_argument('--desc', default='', help='Append desc to the run descriptor string')
     parser.add_argument('--run-dir-root',
-                        help='Working dir for a training or a validation run. Will contain training and validation results.')
+                        help='Working dir for a training or a validation run. '
+                             'Will contain training and validation results.')
     subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
 
     # Parser Train
     parser_train = subparsers.add_parser('train', help='Train a network')
     parser_train.add_argument('--noise2noise', nargs='?', type=str2bool, const=True, default=True,
-                              help='Noise2noise (--noise2noise=true) or noise2clean (--noise2noise=false).  Default is noise2noise=true.')
+                              help='Noise2noise (--noise2noise=true) or noise2clean (--noise2noise=false). '
+                                   'Default is noise2noise=true.')
     parser_train.add_argument('--noise', default='gaussian',
                               help='Type of noise corruption (one of: gaussian, poisson)')
     parser_train.add_argument('--long-train', default=False,
                               help='Train for a very long time (500k iterations or 500k*minibatch image)')
     parser_train.add_argument('--train-tfrecords', help='Filename of the training set tfrecords file')
-    parser_train.add_argument('--val-dir', help='Validation images directory')
+    parser_train.add_argument('--val-dir', default='kodak', help='Validation images directory')
     parser_train.set_defaults(func=train)
 
     # Parser Validate
