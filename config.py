@@ -13,11 +13,21 @@ import dnnlib.submission.submit as submit
 
 import validation
 
-NB_CHANNEL = 3
+NB_CHANNEL = 1
+NPY_IMAGES = True
+LOG_IMAGES = True
 
 
 def get_nb_channels():
     return NB_CHANNEL
+
+
+def is_image_npy():
+    return NPY_IMAGES
+
+
+def is_image_log():
+    return LOG_IMAGES
 
 
 # Submit config
@@ -70,16 +80,20 @@ datasets = {
     'mva-sar': dnnlib.EasyDict(dataset_dir='datasets/mva-sar'),
     'mva-sar-train': dnnlib.EasyDict(dataset_dir='datasets/mva-sar/train'),
     'mva-sar-val': dnnlib.EasyDict(dataset_dir='datasets/mva-sar/val'),
+    'mva-sar-npy-train': dnnlib.EasyDict(dataset_dir='datasets/mva-sar-npy/train'),
+    'mva-sar-npy-val': dnnlib.EasyDict(dataset_dir='datasets/mva-sar-npy/val'),
     'set14': dnnlib.EasyDict(dataset_dir='datasets/set14')
 }
 
 default_validation_config = datasets['kodak']
 mva_sar_validation_config = datasets['mva-sar-val']
+mva_sar_npy_validation_config = datasets['mva-sar-npy-val']
 
 val_datasets = {
     'default': default_validation_config,
     'kodak': default_validation_config,
-    'mva-sar': mva_sar_validation_config
+    'mva-sar': mva_sar_validation_config,
+    'mva-sar-npy': mva_sar_npy_validation_config
 }
 
 corruption_types = {
@@ -92,8 +106,8 @@ corruption_types = {
 # ------------------------------------------------------------------------------------------
 
 train_config = dnnlib.EasyDict(
-    iteration_count=100000,  # Value to modify: std=300,000
-    eval_interval=1000,
+    iteration_count=40000,  # Value to modify: std=300,000
+    eval_interval=500,
     minibatch_size=4,
     run_func_name="train.train",
     learning_rate=0.0003,

@@ -16,7 +16,10 @@ def parse_tfrecord_tf(record):
     features = tf.parse_single_example(record, features={
         'shape': tf.FixedLenFeature([3], tf.int64),
         'data': tf.FixedLenFeature([], tf.string)})
-    data = tf.decode_raw(features['data'], tf.uint8)
+    if config.is_image_npy():
+        data = tf.decode_raw(features['data'], tf.float32)
+    else:
+        data = tf.decode_raw(features['data'], tf.uint8)
     return tf.reshape(data, features['shape'])
 
 
@@ -54,7 +57,7 @@ def random_crop_noised_clean(x, add_noise):
 def create_dataset(train_tfrecords, minibatch_size, add_noise):
     print('Setting up dataset source from', train_tfrecords)
     buffer_mb = 256
-    num_threads = 2
+    num_threads = 4
     dset = tf.data.TFRecordDataset(train_tfrecords, compression_type='', buffer_size=buffer_mb << 20)
     dset = dset.repeat()
     buf_size = 1000

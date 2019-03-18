@@ -39,7 +39,10 @@ class ValidationSet:
         for fname in fnames:
             try:
                 if config.get_nb_channels() == 1:
-                    im = PIL.Image.open(fname).convert('L')
+                    if config.is_image_npy():
+                        im = np.load(fname)
+                    else:
+                        im = PIL.Image.open(fname).convert('L')
                 else:
                     im = PIL.Image.open(fname).convert('RGB')
 

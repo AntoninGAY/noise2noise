@@ -14,6 +14,8 @@ import tensorflow as tf
 import PIL.Image
 import numpy as np
 
+from config import get_nb_channels, is_image_npy
+
 from collections import defaultdict
 
 size_stats = defaultdict(int)
@@ -28,7 +30,11 @@ def load_image(fname):
         size_stats['< 256x256'] += 1
     else:
         size_stats['>= 256x256'] += 1
-    arr = np.array(im.convert('L'), dtype=np.uint8) # 'L' for Black and White
+
+    if get_nb_channels() == 1:
+        arr = np.array(im.convert('L'), dtype=np.uint8) # 'L' for Black and White
+    else:
+        arr = np.array(im.convert('RGB'), dtype=np.uint8) # 'L' for Black and White
     assert len(arr.shape) == 2
     return arr
 
@@ -65,9 +71,14 @@ def main():
         sys.exit(1)
 
     print('Loading image list from %s' % args.input_dir)
-    images = sorted(glob.glob(os.path.join(args.input_dir, '*.JPEG')))
-    images += sorted(glob.glob(os.path.join(args.input_dir, '*.jpg')))
-    images += sorted(glob.glob(os.path.join(args.input_dir, '*.png')))
+
+    if is_image_npy():
+        images = sorted(glob.glob(os.path.join(args.input_dir, '*.npy')))
+    else:
+        images = sorted(glob.glob(os.path.join(args.input_dir, '*.JPEG')))
+        images += sorted(glob.glob(os.path.join(args.input_dir, '*.jpg')))
+        images += sorted(glob.glob(os.path.join(args.input_dir, '*.png')))
+
     np.random.RandomState(0x1234f00d).shuffle(images)
 
     # ----------------------------------------------------------
@@ -76,7 +87,10 @@ def main():
     writer = tf.python_io.TFRecordWriter(args.out)
     for (idx, imgname) in enumerate(images):
         print(idx, imgname)
-        image = load_image(imgname)
+        if is_image_npy():
+            image = np.load(imgname)
+        else:
+            image = load_image(imgname)
         if len(image.shape) == 2:
             image = np.array([image])
         feature = {

@@ -53,7 +53,15 @@ def save_image(submit_config, img_t, filename):
 
 
 def clip_to_uint8(arr):
-    return np.clip((arr + 0.5) * 255.0 + 0.5, 0, 255).astype(np.uint8)
+    if config.is_image_log():
+        norm_max = 10.089
+        norm_min = -1.423
+        im_exp = np.exp((norm_max - norm_min) * arr + norm_min)
+
+        return np.clip(im_exp * 255.0, 0, 255).astype(np.uint8)
+    else:
+        return np.clip((arr + 0.5) * 255.0 + 0.5, 0, 255).astype(np.uint8)
+
 
 
 def crop_np(img, x, y, w, h):
