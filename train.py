@@ -61,9 +61,8 @@ class AugmentSpeckle:
     at the creation of the object, and on method call, a random one of them is added
     """
 
-    def __init__(self, l_nb_views, normalize=False, norm_max=10.089, norm_min=-1.423, quick_noise_computation=False):
+    def __init__(self, l_nb_views, norm_max=10.089, norm_min=-1.423, quick_noise_computation=False):
         self.L = l_nb_views
-        self.normalize = normalize
         self.norm_max = norm_max
         self.norm_min = norm_min
 
@@ -86,9 +85,12 @@ class AugmentSpeckle:
 
         # We compute the Speckle noise
         s = tf.zeros(shape=tf.shape(im_log))
+        if config.get_nb_channels() == 3:
+            s = s[0]
+
         for k in range(0, self.L):
-            gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(im_log), stddev=1),
-                                       tf.random_normal(shape=tf.shape(im_log), stddev=1))) ** 2) / 2
+            gamma = (tf.abs(tf.complex(tf.random_normal(shape=tf.shape(s), stddev=1),
+                                       tf.random_normal(shape=tf.shape(s), stddev=1))) ** 2) / 2
             s = s + gamma
         s_amplitude = tf.sqrt(s / self.L)
 
@@ -102,7 +104,11 @@ class AugmentSpeckle:
         log_speckle_norm = log_speckle / (self.norm_max - self.norm_min)
 
         # The biased noisy image
-        y = im_log + log_speckle_norm
+        if config.get_nb_channels() == 3:
+            log_speckle_norm_3ch = tf.concat([[log_speckle_norm], [log_speckle_norm], [log_speckle_norm]], axis=0)
+            y = im_log + log_speckle_norm_3ch
+        else:
+            y = im_log + log_speckle_norm
 
         return y
 
@@ -139,17 +145,22 @@ class AugmentSpeckle:
         :return:
         """
 
+        if config.get_nb_channels() == 3:
+            shape = im_log[0].shape
+        else:
+            shape = im_log.shape
+
         if self.quick_noise:
             # If quick noise computation, we pick the noise from pre-computed list
-            log_speckle_norm = np.random.choice(self.noise_sample, size=im_log.shape)
+            log_speckle_norm = np.random.choice(self.noise_sample, size=shape)
         else:
             # Otherwise, we compute the Speckle noise
 
             # Computes the Speckle noise
-            s = np.zeros(shape=np.shape(im_log))
+            s = np.zeros(shape=shape)
             for k in range(0, self.L):
-                gamma = (np.abs(np.random.normal(size=np.shape(im_log), scale=1) +
-                                1j * np.random.normal(size=np.shape(im_log), scale=1)) ** 2) / 2
+                gamma = (np.abs(np.random.normal(size=shape, scale=1) +
+                                1j * np.random.normal(size=shape, scale=1)) ** 2) / 2
                 s = s + gamma
             s_amplitude = np.sqrt(s / self.L)
 
@@ -161,8 +172,14 @@ class AugmentSpeckle:
             # Normalise it
             log_speckle_norm = log_speckle / (self.norm_max - self.norm_min)
 
+        if config.get_nb_channels() == 3:
+            log_speckle_norm_3ch = np.array([log_speckle_norm, log_speckle_norm, log_speckle_norm])
+            y = im_log + log_speckle_norm_3ch
+        else:
+            y = im_log + log_speckle_norm
+
         # The biased noisy image
-        return im_log + log_speckle_norm
+        return y
 
     def add_bias_tf(self, x, bias=None):
         """ Adds a bias to an image. If none given, automatically computed

@@ -54,6 +54,7 @@ def save_image(submit_config, img_t, filename):
 
 def clip_to_uint8(arr):
     if config.is_image_log():
+
         norm_max = 10.089
         norm_min = -1.423
         im_exp = np.exp((norm_max - norm_min) * arr + norm_min)
@@ -61,7 +62,6 @@ def clip_to_uint8(arr):
         return np.clip(im_exp * 255.0, 0, 255).astype(np.uint8)
     else:
         return np.clip((arr + 0.5) * 255.0 + 0.5, 0, 255).astype(np.uint8)
-
 
 
 def crop_np(img, x, y, w, h):
@@ -79,3 +79,16 @@ def infer_image(net, img):
         padded_img = np.pad(img, ((0, 0), (0, ph), (0, pw)), 'reflect')
     inferred = net.run(np.expand_dims(padded_img, axis=0), width=w + pw, height=h + ph)
     return clip_to_uint8(crop_np(inferred[0], 0, 0, w, h))
+
+
+# Run an image through the network (apply reflect padding when needed
+# and crop back to original dimensions.)
+def infer_image_no_uint(net, img):
+    w = img.shape[2]
+    h = img.shape[1]
+    pw, ph = (w + 31) // 32 * 32 - w, (h + 31) // 32 * 32 - h
+    padded_img = img
+    if pw != 0 or ph != 0:
+        padded_img = np.pad(img, ((0, 0), (0, ph), (0, pw)), 'reflect')
+    inferred = net.run(np.expand_dims(padded_img, axis=0), width=w + pw, height=h + ph)
+    return crop_np(inferred[0], 0, 0, w, h)

@@ -38,19 +38,21 @@ class ValidationSet:
         images = []
         for fname in fnames:
             try:
-                if config.get_nb_channels() == 1:
-                    if config.is_image_npy():
-                        im = np.load(fname)
-                    else:
-                        im = PIL.Image.open(fname).convert('L')
+                if config.is_image_npy():
+                    im = np.load(fname)
                 else:
-                    im = PIL.Image.open(fname).convert('RGB')
+                    if config.get_nb_channels() == 1:
+                        im = PIL.Image.open(fname).convert('L')
+                    else:
+                        im = PIL.Image.open(fname).convert('RGB')
 
                 arr = np.array(im, dtype=np.float32)
 
                 # If only one channel, we can have arr.shape = (256, 256) instead of (1, 256, 256) or (256, 256, 1)
                 if len(arr.shape) == 2:
                     reshaped = np.array([arr / 255.0 - 0.5])
+                elif config.is_image_npy():
+                    reshaped = arr / 255.0 - 0.5
                 else:
                     reshaped = arr.transpose([2, 0, 1]) / 255.0 - 0.5
 
@@ -62,12 +64,17 @@ class ValidationSet:
     def evaluate(self, net, iteration, noise_func):
         avg_psnr = 0.0
         for idx in range(len(self.images)):
+            # We load the original image, between -0.5 and 0.5
             orig_img = self.images[idx]
             w = orig_img.shape[2]
             h = orig_img.shape[1]
 
             noisy_img = noise_func(orig_img)
-            pred255 = util.infer_image(net, noisy_img)
+            # We get the predicted image, between -0.5 and 0.5
+            pred = util.infer_image_no_uint(net, noisy_img)
+
+            # Computing the square root error ?
+            pred255 = util.clip_to_uint8(pred)
             orig255 = util.clip_to_uint8(orig_img)
             assert (pred255.shape[2] == w and pred255.shape[1] == h)
 
@@ -76,10 +83,11 @@ class ValidationSet:
             cur_psnr = 10.0 * np.log10((255 * 255) / (s / (w * h * 3)))
             avg_psnr += cur_psnr
 
+            # Saving the images
             util.save_image(self.submit_config, pred255, "img_{0}_val_{1}_pred.png".format(iteration, idx))
 
             if iteration == 0:
-                util.save_image(self.submit_config, orig_img, "img_{0}_val_{1}_orig.png".format(iteration, idx))
+                util.save_image(self.submit_config, orig255, "img_{0}_val_{1}_orig.png".format(iteration, idx))
                 util.save_image(self.submit_config, noisy_img, "img_{0}_val_{1}_noisy.png".format(iteration, idx))
         avg_psnr /= len(self.images)
         print('Average PSNR: %.2f' % autosummary('PSNR_avg_psnr', avg_psnr))
