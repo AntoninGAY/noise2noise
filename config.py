@@ -8,9 +8,7 @@
 import dnnlib
 import argparse
 import sys
-
 import dnnlib.submission.submit as submit
-
 import validation
 
 # Those first hyper-parameters have to be tuned

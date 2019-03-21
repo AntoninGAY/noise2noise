@@ -24,18 +24,31 @@ from scipy import special
 
 
 class AugmentGaussian:
+    """ Class for Gaussian noise
+
+    """
     def __init__(self, validation_stddev, train_stddev_rng_range):
         self.validation_stddev = validation_stddev
         self.train_stddev_range = train_stddev_rng_range
 
-    def add_train_noise_tf(self, x):
+    def add_train_noise_tf(self, x: tf.Tensor):
+        """ Adding gaussian noise to training images, in TF format
+
+        :param x:
+        :return:
+        """
         (minval, maxval) = self.train_stddev_range
         shape = tf.shape(x)
         rng_stddev = tf.random_uniform(shape=[1, 1, 1], minval=minval / 255.0, maxval=maxval / 255.0)
         y = x + tf.random_normal(shape) * rng_stddev
         return y
 
-    def add_validation_noise_np(self, x):
+    def add_validation_noise_np(self, x: np.ndarray):
+        """ Adding gaussian noise to the validation images, in NP format
+
+        :param x:
+        :return:
+        """
         return x + np.random.normal(size=x.shape) * (self.validation_stddev / 255.0)
 
 
@@ -94,26 +107,26 @@ class AugmentSpeckle:
             s = s + gamma
         s_amplitude = tf.sqrt(s / self.L)
 
-        # We get the log
+        # We get the log, remove the bias, and normalize the image
         log_speckle = tf.log(s_amplitude)
-
-        bias = (1 / 2) * (special.psi(self.L) - tf.log(float(self.L)))
-        log_speckle = self.add_bias_tf(log_speckle, -1 * bias)
-
-        # Normalise it
+        log_speckle = self.add_bias_tf(log_speckle)
         log_speckle_norm = log_speckle / (self.norm_max - self.norm_min)
 
-        # The biased noisy image
+        # Depending on the number of channels, we add the noise one to three times
         if config.get_nb_channels() == 3:
             log_speckle_norm_3ch = tf.concat([[log_speckle_norm], [log_speckle_norm], [log_speckle_norm]], axis=0)
-            y = im_log + log_speckle_norm_3ch
+            im_noisy = im_log + log_speckle_norm_3ch
         else:
-            y = im_log + log_speckle_norm
+            im_noisy = im_log + log_speckle_norm
 
-        return y
+        return im_noisy
 
     def generate_validation_noise_np(self, shape):
-        # We compute the Speckle noise
+        """ Generate a array of speckle noise
+
+        :param shape:
+        :return:
+        """
 
         # Computes the Speckle noise
         s = np.zeros(shape=shape)
@@ -123,18 +136,15 @@ class AugmentSpeckle:
             s = s + gamma
         s_amplitude = np.sqrt(s / self.L)
 
-        # Get the log of the SPeckle noise and de-biased it
+        # Get the log of the SPeckle noise, remove the bias and normalize it
         log_speckle = np.log(s_amplitude)
-
-        bias = (1 / 2) * (special.psi(self.L) - np.log(self.L))
-        log_speckle = self.add_bias_np(log_speckle, -1 * bias)
-        # Normalise it
+        log_speckle = self.add_bias_np(log_speckle)
         log_speckle_norm = log_speckle / (self.norm_max - self.norm_min)
 
         # We unbiased the image
         return log_speckle_norm
 
-    def add_validation_noise_np(self, im_log):
+    def add_validation_noise_np(self, im_log: np.ndarray):
         """ Add noise to training dataset.
         Author: Emanuele Dalsasso <emanuele.dalsasso@telecom-paristech.fr>
 
@@ -145,18 +155,17 @@ class AugmentSpeckle:
         :return:
         """
 
+        # We compute the shape of the noise array to compute
         if config.get_nb_channels() == 3:
             shape = im_log[0].shape
         else:
             shape = im_log.shape
 
+        # If quick noise computation, we pick the noise from pre-computed list
         if self.quick_noise:
-            # If quick noise computation, we pick the noise from pre-computed list
             log_speckle_norm = np.random.choice(self.noise_sample, size=shape)
         else:
             # Otherwise, we compute the Speckle noise
-
-            # Computes the Speckle noise
             s = np.zeros(shape=shape)
             for k in range(0, self.L):
                 gamma = (np.abs(np.random.normal(size=shape, scale=1) +
@@ -164,22 +173,19 @@ class AugmentSpeckle:
                 s = s + gamma
             s_amplitude = np.sqrt(s / self.L)
 
-            # Get the log of the SPeckle noise and de-biased it
+            # Get the log of the SPeckle noise, remove the bias and normalize it
             log_speckle = np.log(s_amplitude)
-
-            bias = (1 / 2) * (special.psi(self.L) - np.log(self.L))
-            log_speckle = self.add_bias_np(log_speckle, -1 * bias)
-            # Normalise it
+            log_speckle = self.add_bias_np(log_speckle)
             log_speckle_norm = log_speckle / (self.norm_max - self.norm_min)
 
+        # If we have 3 channels, we add the same noise to all the channels.
         if config.get_nb_channels() == 3:
             log_speckle_norm_3ch = np.array([log_speckle_norm, log_speckle_norm, log_speckle_norm])
-            y = im_log + log_speckle_norm_3ch
+            im_noisy = im_log + log_speckle_norm_3ch
         else:
-            y = im_log + log_speckle_norm
+            im_noisy = im_log + log_speckle_norm
 
-        # The biased noisy image
-        return y
+        return im_noisy
 
     def add_bias_tf(self, x, bias=None):
         """ Adds a bias to an image. If none given, automatically computed
@@ -187,7 +193,6 @@ class AugmentSpeckle:
         :param x:
         :param bias:
         """
-
         if bias is None:
             bias = (1 / 2) * (special.psi(self.L) - tf.log(self.L))
             bias = - bias
@@ -200,7 +205,6 @@ class AugmentSpeckle:
         :param x:
         :param bias:
         """
-
         if bias is None:
             bias = (1 / 2) * (special.psi(self.L) - np.log(self.L))
             bias = - bias
@@ -213,7 +217,6 @@ class AugmentSpeckle:
         :param x:
         :param bias:
         """
-
         if bias is None:
             bias = (1 / 2) * (special.psi(self.L) - np.log(self.L))
 
@@ -296,6 +299,7 @@ def train(
     time_maintenance = ctx.get_time_since_last_update()
     ctx.update(loss='run %d' % submit_config.run_id, cur_epoch=0, max_epoch=iteration_count)
 
+    # ***********************************
     # The actual training loop
     for i in range(iteration_count):
         # Whether to stop the training or not should be asked from the context
@@ -329,9 +333,11 @@ def train(
             ctx.update(loss='run %d' % submit_config.run_id, cur_epoch=i, max_epoch=iteration_count)
             time_maintenance = ctx.get_last_update_interval() - time_train
 
+        # Training epoch
         lrate = compute_ramped_down_lrate(i, iteration_count, ramp_down_perc, learning_rate)
         tfutil.run([train_step], {lrate_in: lrate})
 
+    # End of training
     print("Elapsed time: {0}".format(util.format_time(ctx.get_time_since_start())))
     save_snapshot(submit_config, net, 'final')
 
