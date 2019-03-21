@@ -13,20 +13,34 @@ import dnnlib.submission.submit as submit
 
 import validation
 
+# Those first hyper-parameters have to be tuned
+
 NB_CHANNEL = 3
 NPY_IMAGES = True
 LOG_IMAGES = True
 
 
 def get_nb_channels():
+    """ Assessor for the nb_channels
+
+    :return config.NB_CHANNEL:
+    """
     return NB_CHANNEL
 
 
 def is_image_npy():
+    """ Assessor for the boolean if the images are in .npy format
+
+    :return config.NPY_IMAGES:
+    """
     return NPY_IMAGES
 
 
 def is_image_log():
+    """ Assessor for the boolean if the images are in log
+
+    :return config.LOG_IMAGES:
+    """
     return LOG_IMAGES
 
 
@@ -86,19 +100,18 @@ datasets = {
     'set14': dnnlib.EasyDict(dataset_dir='datasets/set14')
 }
 
-default_validation_config = datasets['kodak']
-mva_sar_validation_config = datasets['mva-sar-val']
-mva_sar_npy_validation_config = datasets['mva-sar-npy-val']
-mva_sar_npy_3ch_validation_config = datasets['mva-sar-npy-3ch-val']
-
+# Dictionary to link names of validation datasets and their configurations
 val_datasets = {
-    'default': default_validation_config,
-    'kodak': default_validation_config,
-    'mva-sar': mva_sar_validation_config,
-    'mva-sar-npy': mva_sar_npy_validation_config,
-    'mva-sar-npy-3ch': mva_sar_npy_3ch_validation_config
+    'default': datasets['kodak'],
+    'kodak': datasets['kodak'],
+    'mva-sar': datasets['mva-sar-val'],
+    'mva-sar-npy': datasets['mva-sar-npy-val'],
+    'mva-sar-npy-3ch': datasets['mva-sar-npy-3ch-val']
 }
 
+default_validation_config = val_datasets['default']
+
+# Dictionary to link names of noises and their configurations
 corruption_types = {
     'gaussian': gaussian_noise_config,
     'poisson': poisson_noise_config,
@@ -161,7 +174,14 @@ examples = '''examples:
 '''
 
 if __name__ == "__main__":
+    # Defines the functions to be called in case of training, validation of infer
     def train(in_args):
+        """ Read the arguments given to train and lauch the training
+
+        :param in_args:
+        :return:
+        """
+        # Reading 'noise2noise" and 'long-run' args
         if in_args:
             n2n = in_args.noise2noise if 'noise2noise' in in_args else True
             train_config.noise2noise = n2n
@@ -169,27 +189,30 @@ if __name__ == "__main__":
                 train_config.iteration_count = 500000
                 train_config.eval_interval = 1000
                 train_config.ramp_down_perc = 0.5
-
         else:
             print('running with defaults in train_config')
 
-        # Type of noise selection
+        # Reading 'noise' argument
         noise = 'gaussian'
         if 'noise' in in_args:
-            if in_args.noise not in corruption_types:
-                error('Unknown noise type', in_args.noise)
-            else:
+            if in_args.noise in corruption_types:
                 noise = in_args.noise
+            else:
+                error('Unknown noise type', in_args.noise)
         train_config.noise = corruption_types[noise]
 
+        # Reading type of training : noise 2 noise or noise 2 clean
+        # NB : default == noise 2 noise
         if train_config.noise2noise:
             submit_config.run_desc += "-n2n"
         else:
             submit_config.run_desc += "-n2c"
 
+        # Reading the 'tfrecords' directory argument
         if 'train_tfrecords' in in_args and in_args.train_tfrecords is not None:
             train_config.train_tfrecords = submit.get_path_from_template(in_args.train_tfrecords)
 
+        # Reading the validation directory
         val_dir = 'default'
         if 'val_dir' in in_args:
             if in_args.val_dir not in val_datasets:
@@ -198,10 +221,11 @@ if __name__ == "__main__":
                 val_dir = in_args.val_dir
             train_config.validation_config = val_datasets[val_dir]
 
+        # Finally, printing the config and launching the training
         print(train_config)
         dnnlib.submission.submit.submit_run(submit_config, **train_config)
 
-
+    # If validation
     def validate(in_args):
         if submit_config.submit_target != dnnlib.SubmitTarget.LOCAL:
             print('Command line overrides currently supported only in local runs for the validate subcommand')
@@ -220,7 +244,7 @@ if __name__ == "__main__":
         validate_config.network_snapshot = in_args.network_snapshot
         dnnlib.submission.submit.submit_run(submit_config, **validate_config)
 
-
+    # If infer
     def infer_image(in_args):
         if submit_config.submit_target != dnnlib.SubmitTarget.LOCAL:
             print('Command line overrides currently supported only in local runs for the validate subcommand')
@@ -277,6 +301,7 @@ if __name__ == "__main__":
     parser_infer_image.add_argument('--network-snapshot', help='Trained network pickle')
     parser_infer_image.set_defaults(func=infer_image)
 
+    # Reading the given arguments
     args = parser.parse_args()
     submit_config.run_desc = desc + args.desc
     if args.run_dir_root is not None:
