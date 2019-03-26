@@ -54,8 +54,8 @@ def log_validation_plot(path, l_nb_view, id_image=None, is_log=True, noise='spec
 
         images_descr = [str(file_id) + ' - Original Image',
                         str(file_id) + ' - Noisy Image - L = ' + str(l_nb_view),
-                        # str(file_id) + ' - Noisy Image - Gaussian ~ L = ' + str(l_nb_view),
-                        str(file_id) + ' - Predicted Image']
+                        str(file_id) + ' - Predicted Image',
+                        str(file_id) + ' - Ratio: Noisy / Predicted']
 
         if noise == 'speckle':
             if is_log:
@@ -71,6 +71,8 @@ def log_validation_plot(path, l_nb_view, id_image=None, is_log=True, noise='spec
                       imageio.imread(path + '/img_0_val_' + str(file_id) + '_noisy.png'),
                       imageio.imread(path + '/img_0_val_' + str(file_id) + '_pred.png')]
 
+        images.append(images[1] / images[2])
+
         for id_im, image in enumerate(images):
             if is_log:
                 image = unlog_image(image / 255)
@@ -79,8 +81,11 @@ def log_validation_plot(path, l_nb_view, id_image=None, is_log=True, noise='spec
                 # image = image.mean(axis=2)
                 image = image[:, :, 0]
 
-            plt.subplot(nb_image, 3, 3 * idx + id_im + 1)
-            plt.imshow(image, cmap='gray', vmin=0, vmax=255)
+            plt.subplot(nb_image, 4, 4 * idx + id_im + 1)
+            if id_im != 3:
+                plt.imshow(image, cmap='gray', vmin=0, vmax=255)
+            else:
+                plt.imshow(image, cmap='gray')
             plt.axis('off')
             plt.title(images_descr[id_im])
 
@@ -117,10 +122,9 @@ def plot_noise_distr():
 
 
 if __name__ == '__main__':
-    # plot_noise_distr()
+
     nb_view = 1
-    # log_validation_plot('results/00047-autoencoder', nb_view, [62], is_log=False, noise='speckle')
-    # log_validation_plot('results/00049-autoencoder', nb_view, [62], is_log=False, noise='gaussian')
-    # log_validation_plot('results/00053-autoencoder', nb_view, [62], is_log=False, noise='speckle', nb_channel=3)
-    log_validation_plot('results/00055-autoencoder', nb_view, [62], is_log=False, noise='speckle', nb_channel=3)
+
+    log_validation_plot('results/00059-autoencoder', 1, [19, 62], is_log=False, noise='speckle', nb_channel=3)
+    log_validation_plot('results/00061-autoencoder', 5, [19, 62], is_log=False, noise='speckle', nb_channel=3)
     plt.show()
