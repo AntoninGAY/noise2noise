@@ -1,0 +1,1396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="506a329c-326a-41b9-8162-8bff48c20b10" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/long_train_L1_L5.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.idea/shelf/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/visualization.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="488">
+              <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SECOND">
+              <first_editor />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+              <folding>
+                <element signature="e#342#351#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2996">
+              <caret line="254" column="47" selection-start-line="254" selection-start-column="47" selection-end-line="254" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/validation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="107" column="51" selection-start-line="107" selection-start-column="51" selection-end-line="107" selection-end-column="51" />
+              <folding>
+                <element signature="e#342#351#0" expanded="true" />
+                <element signature="e#782#2085#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/long_train_L1_L5.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="6" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>BSD300 Gau</find>
+      <find>verbose</find>
+      <find>dense</find>
+      <find>3</find>
+      <find>loss</find>
+      <find>ParseSingleExample</find>
+      <find>example</find>
+      <find>np.shape(im_log)</find>
+      <find>unrecognized argument</find>
+      <find>autoencoder</find>
+      <find>net_config</find>
+      <find>nb_channels</find>
+      <find>BW</find>
+      <find>NB_CHANNEL</find>
+      <find>nb_cha</find>
+      <find>255</find>
+      <find>uint</find>
+      <find>img_npy/</find>
+      <find>npy_i</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>shape</replace>
+      <replace>get_nb_channels()</replace>
+      <replace>npy_</replace>
+      <replace>npy_²²</replace>
+      <replace>i</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/.idea</dir>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
+    <option name="ROOT_SYNC" value="SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="SingleCanalImage" />
+      </map>
+    </option>
+    <option name="RECENT_COMMON_BRANCH" value="master" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/download_kodak.py" />
+        <option value="$PROJECT_DIR$/dataset_tool_mri.py" />
+        <option value="$PROJECT_DIR$/config_mri.py" />
+        <option value="$PROJECT_DIR$/results/00002-autoencoder'-test'-n2n/src/config.py" />
+        <option value="$PROJECT_DIR$/injectspeckle_amplitude.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/dnnlib/util.py" />
+        <option value="$PROJECT_DIR$/tfspeckle.py" />
+        <option value="$PROJECT_DIR$/ResultsVizualisation.ipynb" />
+        <option value="$PROJECT_DIR$/dnnlib/submission/submit.py" />
+        <option value="$PROJECT_DIR$/train_mri.py" />
+        <option value="$PROJECT_DIR$/network.py" />
+        <option value="$PROJECT_DIR$/dnnlib/tflib/autosummary.py" />
+        <option value="$PROJECT_DIR$/sar src/prod_cropping.py" />
+        <option value="$PROJECT_DIR$/sar src/prod_convert_image_png.py" />
+        <option value="$PROJECT_DIR$/dataset_tool_tf.py" />
+        <option value="$PROJECT_DIR$/dataset.py" />
+        <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/long_train_L1_L5.sh" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/validation.py" />
+        <option value="$PROJECT_DIR$/visualization.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="59" />
+    <option name="y" value="25" />
+    <option name="width" value="1126" />
+    <option name="height" value="1055" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="noise2noise" type="b2602c69:ProjectViewProjectNode" />
+              <item name="noise2noise" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="noise2noise" type="b2602c69:ProjectViewProjectNode" />
+              <item name="noise2noise" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="noise2noise" type="b2602c69:ProjectViewProjectNode" />
+              <item name="noise2noise" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="noise2noise" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="noise2noise" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="results" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="noise2noise" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="results" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="00062-autoencoder" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../altegrad-project" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="noise2noise" is-module-sdk="true">
+        <envs>
+          <env key="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+        </envs>
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="noise2noise" />
+        <option name="myEnvs">
+          <map>
+            <entry key="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+          </map>
+        </option>
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/datasets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.Visualization">
+    <configuration name="long_train_L1_L5.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="PROJECT_INTERPRETER" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/long_train_L1_L5.sh" />
+      <option name="PARAMETERS" value="" />
+      <envs>
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="noise2noise" type="JupiterNotebook" factoryName="Jupyter Notebook">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="additionalOptions" value="" />
+      <option name="ipnbHost" value="127.0.0.1" />
+      <option name="ipnbPort" value="8888" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Create DS - BSD300" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_tool_tf.py" />
+      <option name="PARAMETERS" value="--input-dir datasets/BSDS300/images/train --out=datasets/bsd300.tfrecords" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Create DS - MVA-SAR NPY 3ch" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_tool_tf.py" />
+      <option name="PARAMETERS" value="--input-dir datasets/mva-sar-npy-3ch/train --out=datasets/mva-sar-npy-3ch.tfrecords" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Create DS - MVA-SAR NPY" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_tool_tf.py" />
+      <option name="PARAMETERS" value="--input-dir datasets/mva-sar-npy/train --out=datasets/mva-sar-npy.tfrecords" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Create DS - MVA-SAR" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_tool_tf.py" />
+      <option name="PARAMETERS" value="--input-dir datasets/mva-sar/train --out=datasets/mva-sar.tfrecords" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Download Kodak" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/download_kodak.py" />
+      <option name="PARAMETERS" value="--output-dir=datasets/kodak" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - BSD300 Gaussian" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='BSD300-Gaussian' train --train-tfrecords=datasets/bsd300.tfrecords --noise=gaussian --val-dir=kodak" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - BSD300 Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='BSD300-Speckle' train --train-tfrecords=datasets/bsd300.tfrecords --noise=speckle" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - MVA-SAR Gaussian" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='SAR-Gaussian' train --train-tfrecords=datasets/mva-sar.tfrecords --noise=gaussian --val-dir=mva-sar" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - MVA-SAR NPY 3ch - Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='SAR-NPY-3ch-Speckle-L1' train --train-tfrecords=datasets/mva-sar-npy-3ch.tfrecords --noise=speckle --val-dir=mva-sar-npy-3ch" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - MVA-SAR NPY Gaussian" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='SAR-NPY-Speckle-L5' train --train-tfrecords=datasets/mva-sar-npy.tfrecords --noise=gaussian --val-dir=mva-sar-npy" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - MVA-SAR NPY Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='SAR-NPY-Speckle-L5' train --train-tfrecords=datasets/mva-sar-npy.tfrecords --noise=speckle --val-dir=mva-sar-npy" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train - MVA-SAR Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="--desc='SAR-Speckle' train --train-tfrecords=datasets/mva-sar.tfrecords --noise=speckle --val-dir=mva-sar" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - BSD300 Gaussian" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/kodak --network-snapshot=results/00024-autoencoder'BSD300-Speckle'-n2n/network_final.pickle" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - BSD300 Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/kodak --network-snapshot=results/00024-autoencoder'BSD300-Speckle'-n2n/network_final.pickle --noise=speckle" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - MVA-SAR Gaussian" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/mva-sar/val --network-snapshot=results/00019-autoencoder'-test'-n2n/network_final.pickle --noise=gaussian" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - MVA-SAR Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/mva-sar/val --network-snapshot=results/00017-autoencoder'-test'-n2n/network_final.pickle --noise=speckle" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - MVA-SAR-NPY Gaussian" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/mva-sar-npy/val --network-snapshot=results/00048-autoencoder'SAR-NPY-Speckle-L5'-n2n/network_final.pickle --noise=gaussian" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - MVA-SAR-NPY Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/mva-sar-npy/val --network-snapshot=results/00046-autoencoder'SAR-NPY-Speckle-L5'-n2n/network_final.pickle --noise=speckle" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Validate - MVA-SAR-NPY-3ch Speckle" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/config.py" />
+      <option name="PARAMETERS" value="validate --dataset-dir=datasets/mva-sar-npy-3ch/val --network-snapshot=results/00058-autoencoder'SAR-NPY-3ch-Speckle-L1'-n2n/network_final.pickle --noise=speckle" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Visualization" type="PythonConfigurationType" factoryName="Python">
+      <module name="noise2noise" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visualization.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Bash.long_train_L1_L5.sh" />
+      <item itemvalue="Jupyter Notebook.noise2noise" />
+      <item itemvalue="Python.Download Kodak" />
+      <item itemvalue="Python.Create DS - BSD300" />
+      <item itemvalue="Python.Create DS - MVA-SAR" />
+      <item itemvalue="Python.Create DS - MVA-SAR NPY" />
+      <item itemvalue="Python.Create DS - MVA-SAR NPY 3ch" />
+      <item itemvalue="Python.Train - BSD300 Gaussian" />
+      <item itemvalue="Python.Train - BSD300 Speckle" />
+      <item itemvalue="Python.Train - MVA-SAR Gaussian" />
+      <item itemvalue="Python.Train - MVA-SAR Speckle" />
+      <item itemvalue="Python.Train - MVA-SAR NPY Gaussian" />
+      <item itemvalue="Python.Train - MVA-SAR NPY Speckle" />
+      <item itemvalue="Python.Train - MVA-SAR NPY 3ch - Speckle" />
+      <item itemvalue="Python.Validate - BSD300 Gaussian" />
+      <item itemvalue="Python.Validate - BSD300 Speckle" />
+      <item itemvalue="Python.Validate - MVA-SAR Gaussian" />
+      <item itemvalue="Python.Validate - MVA-SAR Speckle" />
+      <item itemvalue="Python.Validate - MVA-SAR-NPY Gaussian" />
+      <item itemvalue="Python.Validate - MVA-SAR-NPY Speckle" />
+      <item itemvalue="Python.Validate - MVA-SAR-NPY-3ch Speckle" />
+      <item itemvalue="Python.Visualization" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Bash.long_train_L1_L5.sh" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED,SHOW_FIELDS" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="506a329c-326a-41b9-8162-8bff48c20b10" name="Default Changelist" comment="" />
+      <created>1551801756682</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551801756682</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added few comments">
+      <created>1551813421247</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1551813421247</updated>
+    </task>
+    <task id="LOCAL-00002" summary="First implementation of the Speckle noise. Still buggy and not optimized.">
+      <created>1551894080603</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1551894080603</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Finished speckle noise. Added quick computations to it">
+      <created>1552337469722</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1552337469722</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Few changes to respect PIP8">
+      <created>1552338002486</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552338002486</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Changed DS creation to deal with BW images">
+      <created>1552338483031</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552338483031</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Continued modifying code to adapt to BW">
+      <created>1552345858049</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1552345858049</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Minor fix: changed 'L' to 'l'">
+      <created>1552346142821</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1552346142821</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Modification of the dataset creation">
+      <created>1552347355253</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1552347355253</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Finished adaptation to Black and White pictures.&#10;Tested one training: better results">
+      <created>1552350040329</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1552350040329</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Created Jupyter Notebook to visualize results">
+      <created>1552376915804</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1552376915804</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Modified Speckle noise normalization so that it would not be bigger than data">
+      <created>1552391732915</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1552391732915</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Finished coding Speckle noise and bias.&#10;Added visualization function and few results and examples.">
+      <created>1552414053083</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1552414053083</updated>
+    </task>
+    <task id="LOCAL-00013" summary="New test at 100k epochs">
+      <created>1552429194529</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1552429194529</updated>
+    </task>
+    <task id="LOCAL-00014" summary="New test at L=5 50k epochs">
+      <created>1552462386141</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1552462386141</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Included compatibility to 1ch and 3ch datasets, with a constant to modify.">
+      <created>1552572025125</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1552572025125</updated>
+    </task>
+    <task id="LOCAL-00016" summary="PIP8 modifications">
+      <created>1552599937759</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1552599937759</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added .npy images integration for dataset.&#10;The images are now saved in classic format, rather than log if it's log.">
+      <created>1552929357239</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1552929357239</updated>
+    </task>
+    <task id="LOCAL-00018" summary="The network takes 3ch as input in all cases.&#10;The validation images generation has been corrected">
+      <created>1553125581676</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1553125581676</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="59" y="25" width="1861" height="1055" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.56796116" visible="true" weight="0.17301415" />
+      <window_info id="Structure" order="1" sideWeight="0.43203884" side_tool="true" visible="true" weight="0.17301415" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="0" sideWeight="0.4983678" weight="0.32937366" />
+      <window_info anchor="bottom" id="Python Console" order="1" sideWeight="0.49891186" weight="0.32829374" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50108814" side_tool="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32937366" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.33261338" />
+      <window_info anchor="bottom" id="Debug" order="6" sideWeight="0.4990942" weight="0.39956802" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49891186" weight="0.32937366" />
+      <window_info anchor="bottom" id="TODO" order="10" weight="0.32937366" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="Paths">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="dir:/home/antonin/PycharmProjects/noise2noise" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/results/00007-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00000-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00001-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00002-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00003-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00004-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00005-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00008-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00009-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00010-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00011-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00012-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00013-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00014-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00015-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00016-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00017-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00018-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00019-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00020-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00021-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00022-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00023-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00024-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00025-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00026-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00006-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00007-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00008-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00027-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00028-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00030-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00029-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00031-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00033-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00036-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00035-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00034-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00032-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00038-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00037-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00039-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00040-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00041-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00042-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00043-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00044-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00045-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00049-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00046-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00047-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00048-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00051-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00050-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00053-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00052-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00054-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00055-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00056-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00057-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00058-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00059-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00060-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00062-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00061-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00065-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00063-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00064-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00066-autoencoder'-test'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00036-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00057-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00009-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00011-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00012-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00018-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00013-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00020-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00032-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00039-autoencoderBSD300-Gaussian-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00041-autoencoderSAR-Speckle-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00040-autoencoderSAR-Speckle-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00042-autoencoderSAR-Speckle-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00043-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00044-autoencoder'BSD300-Gaussian'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00045-autoencoder'BSD300-Gaussian'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00021-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00022-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00023-autoencoder'BSD300-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00025-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00024-autoencoder'BSD300-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00026-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00027-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00028-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00033-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00029-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00030-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00031-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00032-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00034-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00036-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00035-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00041-autoencoder'SAR-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00042-autoencoder'SAR-NPY-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00043-autoencoder'SAR-NPY-Speckle'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00044-autoencoder'SAR-NPY-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00045-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00047-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00046-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00048-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00049-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00046-autoencoder'SAR-NPY-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00048-autoencoder'SAR-NPY-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00050-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00053-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00052-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00051-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00051-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00053-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00054-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00055-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00058-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00056-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00059-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00056-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00056-autoencoder'SAR-NPY-3ch-Speckle-L1'-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00060-autoencoderSAR-NPY-3ch-Speckle-L5-n2n/src" />
+      <path value="$PROJECT_DIR$/results/results/00000-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00061-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00058-autoencoderSAR-NPY-3ch-Speckle-L1-n2n/src" />
+      <path value="$PROJECT_DIR$/results/00063-autoencoder/src" />
+      <path value="$PROJECT_DIR$/results/00062-autoencoder/src" />
+    </ignored-roots>
+    <MESSAGE value="Added few comments" />
+    <MESSAGE value="First implementation of the Speckle noise. Still buggy and not optimized." />
+    <MESSAGE value="Finished speckle noise. Added quick computations to it" />
+    <MESSAGE value="Few changes to respect PIP8" />
+    <MESSAGE value="Changed DS creation to deal with BW images" />
+    <MESSAGE value="Continued modifying code to adapt to BW" />
+    <MESSAGE value="Minor fix: changed 'L' to 'l'" />
+    <MESSAGE value="Modification of the dataset creation" />
+    <MESSAGE value="Finished adaptation to Black and White pictures.&#10;Tested one training: better results" />
+    <MESSAGE value="Created Jupyter Notebook to visualize results" />
+    <MESSAGE value="Modified Speckle noise normalization so that it would not be bigger than data" />
+    <MESSAGE value="Finished coding Speckle noise and bias.&#10;Added visualization function and few results and examples." />
+    <MESSAGE value="New test at 100k epochs" />
+    <MESSAGE value="New test at L=5 50k epochs" />
+    <MESSAGE value="Included compatibility to 1ch and 3ch datasets, with a constant to modify." />
+    <MESSAGE value="PIP8 modifications" />
+    <MESSAGE value="Added .npy images integration for dataset.&#10;The images are now saved in classic format, rather than log if it's log." />
+    <MESSAGE value="The network takes 3ch as input in all cases.&#10;The validation images generation has been corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="The network takes 3ch as input in all cases.&#10;The validation images generation has been corrected" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="args[0][1]._id" />
+        <watch expression="args[0][1]" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_1_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_1_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_2_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_2_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_2_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_3_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_3_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_3_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_4_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_4_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_4_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00046-autoencoder'SAR-NPY-Speckle-L5'-n2n/img_199900_val_63_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00046-autoencoder'SAR-NPY-Speckle-L5'-n2n/img_199900_val_62_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_5_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_5_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_5_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_15_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_15_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_20_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00047-autoencoder/img_0_val_20_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="61" column="18" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/Noise distrib.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dnnlib/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="235" selection-start-line="235" selection-end-line="235" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dnnlib/submission/submit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="251" selection-start-line="251" selection-end-line="251" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00054-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/img_0_val_0_pred.png" />
+    <entry file="file://$PROJECT_DIR$/results/00054-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/img_0_val_0_orig.png" />
+    <entry file="file://$PROJECT_DIR$/results/00054-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/img_0_val_0_noisy.png" />
+    <entry file="file://$PROJECT_DIR$/results/00050-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/img_0_x_aug.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00050-autoencoder'SAR-NPY-3ch-Speckle-L5'-n2n/img_500_val_62_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1815">
+          <caret line="136" column="8" selection-start-line="136" selection-start-column="8" selection-end-line="136" selection-end-column="8" />
+          <folding>
+            <element signature="e#342#365#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset_tool_tf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
+          <folding>
+            <element signature="e#342#353#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_63_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_63_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_63_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_11_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_11_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_3_pred.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_3_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_3_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00055-autoencoder/img_0_val_0_orig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/00062-autoencoder/png_img_0_val_7_noisy.png" />
+    <entry file="file://$PROJECT_DIR$/results/00062-autoencoder/png_img_0_val_7_pred.png" />
+    <entry file="file://$PROJECT_DIR$/results/00062-autoencoder/png_img_0_val_7_orig.png" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SECOND">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/long_train_L1_L5.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="6" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="107" column="51" selection-start-line="107" selection-start-column="51" selection-end-line="107" selection-end-column="51" />
+          <folding>
+            <element signature="e#342#351#0" expanded="true" />
+            <element signature="e#782#2085#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+          <folding>
+            <element signature="e#342#351#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2996">
+          <caret line="254" column="47" selection-start-line="254" selection-start-column="47" selection-end-line="254" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
