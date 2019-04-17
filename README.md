@@ -182,3 +182,32 @@ The expected average PSNR on the validation set (named `test_db_clamped` in code
 Noise-to-noise training is enabled by default for the MRI case.  To use noise-to-clean training, edit `config_mri.py` and change `corrupt_targets=True` to `corrupt_targets=False`.
 
 Training for 300 epochs takes roughly 9 hours on an NVIDIA Titan V GPU.
+
+### For training on SAR images
+
+Download the SAR images, which can be found on the Google Drive, and place them in a given folder. The images should be already log normalized, they should be in .npy format as matrixes of size 256*256*3 (3ch images).
+Remember to keep files for validation.
+
+Then, three steps are needed. First, create a TF file for the dataset :
+
+```
+# This should run through images and output a file called `datasets/mva-sar.tfrecords`.
+python dataset_tool_tf.py --input-dir datasets/mva-sar-npy-3ch/train --out=datasets/mva-sar-npy-3ch.tfrecords
+```
+
+Secondly, train the network. The configuration of the speckle noise (L=1 or L=5) has to be done iderectly at the top of the file 'config.py'. You can check there that the parameters for 'LOG Images' and 'Number of channels' corresponds to your situation (LOG = True and Channels = 3). The number of epochs of the training has to be modified in this same file.
+Then, you can launch the training:
+
+```
+# try python config.py train --help for available options
+python config.py --desc='train' train --train-tfrecords=datasets/mva-sar-npy-3ch.tfrecords --noise=speckle --val-dir=mva-sar-npy-3ch
+```
+
+Finally, you can validate your training on the validation set:
+NB : the 'XX' has to be replaced with your results
+
+```
+python config.py validate --dataset-dir=datasets/mva-sar-npy-3ch/val --network-snapshot=results/000XX-autoencoder'train'-n2n/network_final.pickle --noise=speckle
+
+```
+Eventually, you can visualize your results by launching the file 'visualization.py'
